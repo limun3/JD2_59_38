@@ -264,6 +264,10 @@
     <Compile Include="Migrations\201706040304228_Initial.Designer.cs">
       <DependentUpon>201706040304228_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706061059077_Kandji.cs" />
+    <Compile Include="Migrations\201706061059077_Kandji.Designer.cs">
+      <DependentUpon>201706061059077_Kandji.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Accommodation.cs" />
     <Compile Include="Models\AccommodationType.cs" />
@@ -360,6 +364,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201706040304228_Initial.resx">
       <DependentUpon>201706040304228_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706061059077_Kandji.resx">
+      <DependentUpon>201706061059077_Kandji.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

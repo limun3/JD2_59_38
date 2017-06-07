@@ -13,44 +13,44 @@ using BookingApp.Models;
 namespace BookingApp.Controllers
 {
     [Authorize]
-    public class AccommodationsController : ApiController
+    public class PlacesController : ApiController
     {
         private BAContext db = new BAContext();
 
-        // GET: api/Accommodations
-        public IQueryable<Accommodation> GetAccommodations()
+        // GET: api/Places
+        public IQueryable<Place> GetPlaces()
         {
-            return db.Accommodations;
+            return db.Places;
         }
 
-        // GET: api/Accommodations/5
-        [ResponseType(typeof(Accommodation))]
-        public IHttpActionResult GetAccommodation(int id)
+        // GET: api/Places/5
+        [ResponseType(typeof(Place))]
+        public IHttpActionResult GetPlace(int id)
         {
-            Accommodation accommodation = db.Accommodations.Find(id);
-            if (accommodation == null)
+            Place place = db.Places.Find(id);
+            if (place == null)
             {
                 return NotFound();
             }
 
-            return Ok(accommodation);
+            return Ok(place);
         }
 
-        // PUT: api/Accommodations/5
+        // PUT: api/Places/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAccommodation(int id, Accommodation accommodation)
+        public IHttpActionResult PutPlace(int id, Place place)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != accommodation.Id)
+            if (id != place.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(accommodation).State = EntityState.Modified;
+            db.Entry(place).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccommodationExists(id))
+                if (!PlaceExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +71,35 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Accommodations
-        [ResponseType(typeof(Accommodation))]
-        public IHttpActionResult PostAccommodation(Accommodation accommodation)
+        // POST: api/Places
+        [ResponseType(typeof(Place))]
+        public IHttpActionResult PostPlace(Place place)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Accommodations.Add(accommodation);
+            db.Places.Add(place);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = accommodation.Id }, accommodation);
+            return CreatedAtRoute("DefaultApi", new { id = place.Id }, place);
         }
 
-        // DELETE: api/Accommodations/5
-        [ResponseType(typeof(Accommodation))]
-        public IHttpActionResult DeleteAccommodation(int id)
+        // DELETE: api/Places/5
+        [ResponseType(typeof(Place))]
+        public IHttpActionResult DeletePlace(int id)
         {
-            Accommodation accommodation = db.Accommodations.Find(id);
-            if (accommodation == null)
+            Place place = db.Places.Find(id);
+            if (place == null)
             {
                 return NotFound();
             }
 
-            db.Accommodations.Remove(accommodation);
+            db.Places.Remove(place);
             db.SaveChanges();
 
-            return Ok(accommodation);
+            return Ok(place);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +111,9 @@ namespace BookingApp.Controllers
             base.Dispose(disposing);
         }
 
-        private bool AccommodationExists(int id)
+        private bool PlaceExists(int id)
         {
-            return db.Accommodations.Count(e => e.Id == id) > 0;
+            return db.Places.Count(e => e.Id == id) > 0;
         }
     }
 }

@@ -28,5 +28,7 @@ namespace BookingApp.Models
         {
             return new BAContext();
         }
+
+        public System.Data.Entity.DbSet<BookingApp.Models.BAIdentityUser> BAIdentityUsers { get; set; }
     }
 }

@@ -13,44 +13,44 @@ using BookingApp.Models;
 namespace BookingApp.Controllers
 {
     [Authorize]
-    public class AccommodationsController : ApiController
+    public class CommentsController : ApiController
     {
         private BAContext db = new BAContext();
 
-        // GET: api/Accommodations
-        public IQueryable<Accommodation> GetAccommodations()
+        // GET: api/Comments
+        public IQueryable<Comment> GetComments()
         {
-            return db.Accommodations;
+            return db.Comments;
         }
 
-        // GET: api/Accommodations/5
-        [ResponseType(typeof(Accommodation))]
-        public IHttpActionResult GetAccommodation(int id)
+        // GET: api/Comments/5
+        [ResponseType(typeof(Comment))]
+        public IHttpActionResult GetComment(int id)
         {
-            Accommodation accommodation = db.Accommodations.Find(id);
-            if (accommodation == null)
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
             {
                 return NotFound();
             }
 
-            return Ok(accommodation);
+            return Ok(comment);
         }
 
-        // PUT: api/Accommodations/5
+        // PUT: api/Comments/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAccommodation(int id, Accommodation accommodation)
+        public IHttpActionResult PutComment(int id, Comment comment)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != accommodation.Id)
+            if (id != comment.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(accommodation).State = EntityState.Modified;
+            db.Entry(comment).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccommodationExists(id))
+                if (!CommentExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +71,35 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Accommodations
-        [ResponseType(typeof(Accommodation))]
-        public IHttpActionResult PostAccommodation(Accommodation accommodation)
+        // POST: api/Comments
+        [ResponseType(typeof(Comment))]
+        public IHttpActionResult PostComment(Comment comment)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Accommodations.Add(accommodation);
+            db.Comments.Add(comment);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = accommodation.Id }, accommodation);
+            return CreatedAtRoute("DefaultApi", new { id = comment.Id }, comment);
         }
 
-        // DELETE: api/Accommodations/5
-        [ResponseType(typeof(Accommodation))]
-        public IHttpActionResult DeleteAccommodation(int id)
+        // DELETE: api/Comments/5
+        [ResponseType(typeof(Comment))]
+        public IHttpActionResult DeleteComment(int id)
         {
-            Accommodation accommodation = db.Accommodations.Find(id);
-            if (accommodation == null)
+            Comment comment = db.Comments.Find(id);
+            if (comment == null)
             {
                 return NotFound();
             }
 
-            db.Accommodations.Remove(accommodation);
+            db.Comments.Remove(comment);
             db.SaveChanges();
 
-            return Ok(accommodation);
+            return Ok(comment);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +111,9 @@ namespace BookingApp.Controllers
             base.Dispose(disposing);
         }
 
-        private bool AccommodationExists(int id)
+        private bool CommentExists(int id)
         {
-            return db.Accommodations.Count(e => e.Id == id) > 0;
+            return db.Comments.Count(e => e.Id == id) > 0;
         }
     }
 }

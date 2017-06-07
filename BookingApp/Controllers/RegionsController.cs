@@ -13,44 +13,44 @@ using BookingApp.Models;
 namespace BookingApp.Controllers
 {
     [Authorize]
-    public class AccommodationsController : ApiController
+    public class RegionsController : ApiController
     {
         private BAContext db = new BAContext();
 
-        // GET: api/Accommodations
-        public IQueryable<Accommodation> GetAccommodations()
+        // GET: api/Regions
+        public IQueryable<Region> GetRegions()
         {
-            return db.Accommodations;
+            return db.Regions;
         }
 
-        // GET: api/Accommodations/5
-        [ResponseType(typeof(Accommodation))]
-        public IHttpActionResult GetAccommodation(int id)
+        // GET: api/Regions/5
+        [ResponseType(typeof(Region))]
+        public IHttpActionResult GetRegion(int id)
         {
-            Accommodation accommodation = db.Accommodations.Find(id);
-            if (accommodation == null)
+            Region region = db.Regions.Find(id);
+            if (region == null)
             {
                 return NotFound();
             }
 
-            return Ok(accommodation);
+            return Ok(region);
         }
 
-        // PUT: api/Accommodations/5
+        // PUT: api/Regions/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAccommodation(int id, Accommodation accommodation)
+        public IHttpActionResult PutRegion(int id, Region region)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != accommodation.Id)
+            if (id != region.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(accommodation).State = EntityState.Modified;
+            db.Entry(region).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccommodationExists(id))
+                if (!RegionExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +71,35 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Accommodations
-        [ResponseType(typeof(Accommodation))]
-        public IHttpActionResult PostAccommodation(Accommodation accommodation)
+        // POST: api/Regions
+        [ResponseType(typeof(Region))]
+        public IHttpActionResult PostRegion(Region region)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Accommodations.Add(accommodation);
+            db.Regions.Add(region);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = accommodation.Id }, accommodation);
+            return CreatedAtRoute("DefaultApi", new { id = region.Id }, region);
         }
 
-        // DELETE: api/Accommodations/5
-        [ResponseType(typeof(Accommodation))]
-        public IHttpActionResult DeleteAccommodation(int id)
+        // DELETE: api/Regions/5
+        [ResponseType(typeof(Region))]
+        public IHttpActionResult DeleteRegion(int id)
         {
-            Accommodation accommodation = db.Accommodations.Find(id);
-            if (accommodation == null)
+            Region region = db.Regions.Find(id);
+            if (region == null)
             {
                 return NotFound();
             }
 
-            db.Accommodations.Remove(accommodation);
+            db.Regions.Remove(region);
             db.SaveChanges();
 
-            return Ok(accommodation);
+            return Ok(region);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +111,9 @@ namespace BookingApp.Controllers
             base.Dispose(disposing);
         }
 
-        private bool AccommodationExists(int id)
+        private bool RegionExists(int id)
         {
-            return db.Accommodations.Count(e => e.Id == id) > 0;
+            return db.Regions.Count(e => e.Id == id) > 0;
         }
     }
 }

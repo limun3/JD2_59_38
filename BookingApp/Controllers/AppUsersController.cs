@@ -12,45 +12,46 @@ using BookingApp.Models;
 
 namespace BookingApp.Controllers
 {
-    [Authorize]
-    public class AccommodationsController : ApiController
+    [Authorize(Roles = "Admin")]
+    public class AppUsersController : ApiController
     {
+
         private BAContext db = new BAContext();
 
-        // GET: api/Accommodations
-        public IQueryable<Accommodation> GetAccommodations()
+        // GET: api/AppUsers
+        public IQueryable<AppUser> GetAppUsers()
         {
-            return db.Accommodations;
+            return db.AppUsers;
         }
 
-        // GET: api/Accommodations/5
-        [ResponseType(typeof(Accommodation))]
-        public IHttpActionResult GetAccommodation(int id)
+        // GET: api/AppUsers/5
+        [ResponseType(typeof(AppUser))]
+        public IHttpActionResult GetAppUser(int id)
         {
-            Accommodation accommodation = db.Accommodations.Find(id);
-            if (accommodation == null)
+            AppUser appUser = db.AppUsers.Find(id);
+            if (appUser == null)
             {
                 return NotFound();
             }
 
-            return Ok(accommodation);
+            return Ok(appUser);
         }
 
-        // PUT: api/Accommodations/5
+        // PUT: api/AppUsers/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAccommodation(int id, Accommodation accommodation)
+        public IHttpActionResult PutAppUser(int id, AppUser appUser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != accommodation.Id)
+            if (id != appUser.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(accommodation).State = EntityState.Modified;
+            db.Entry(appUser).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +59,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccommodationExists(id))
+                if (!AppUserExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +72,35 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Accommodations
-        [ResponseType(typeof(Accommodation))]
-        public IHttpActionResult PostAccommodation(Accommodation accommodation)
+        // POST: api/AppUsers
+        [ResponseType(typeof(AppUser))]
+        public IHttpActionResult PostAppUser(AppUser appUser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Accommodations.Add(accommodation);
+            db.AppUsers.Add(appUser);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = accommodation.Id }, accommodation);
+            return CreatedAtRoute("DefaultApi", new { id = appUser.Id }, appUser);
         }
 
-        // DELETE: api/Accommodations/5
-        [ResponseType(typeof(Accommodation))]
-        public IHttpActionResult DeleteAccommodation(int id)
+        // DELETE: api/AppUsers/5
+        [ResponseType(typeof(AppUser))]
+        public IHttpActionResult DeleteAppUser(int id)
         {
-            Accommodation accommodation = db.Accommodations.Find(id);
-            if (accommodation == null)
+            AppUser appUser = db.AppUsers.Find(id);
+            if (appUser == null)
             {
                 return NotFound();
             }
 
-            db.Accommodations.Remove(accommodation);
+            db.AppUsers.Remove(appUser);
             db.SaveChanges();
 
-            return Ok(accommodation);
+            return Ok(appUser);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +112,9 @@ namespace BookingApp.Controllers
             base.Dispose(disposing);
         }
 
-        private bool AccommodationExists(int id)
+        private bool AppUserExists(int id)
         {
-            return db.Accommodations.Count(e => e.Id == id) > 0;
+            return db.AppUsers.Count(e => e.Id == id) > 0;
         }
     }
 }

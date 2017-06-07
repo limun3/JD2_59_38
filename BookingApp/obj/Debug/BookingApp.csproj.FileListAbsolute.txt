@@ -99,3 +99,5 @@ C:\Users\student\Desktop\BLOK7\JD2_59_38\BookingApp\obj\Debug\BookingApp.csproj.
 C:\Users\student\Desktop\BLOK7\JD2_59_38\BookingApp\obj\Debug\BookingApp.dll
 C:\Users\student\Desktop\BLOK7\JD2_59_38\BookingApp\obj\Debug\BookingApp.pdb
 C:\Users\student\Desktop\BLOK7\JD2_59_38\BookingApp\obj\Debug\BookingApp.Migrations.Kandji.resources
+C:\Users\student\Desktop\BLOK7\JD2_59_38\BookingApp\obj\Debug\BookingApp.csprojResolveAssemblyReference.cache
+C:\Users\student\Desktop\BLOK7\JD2_59_38\BookingApp\obj\Debug\BookingApp.Migrations.MigracijaII.resources

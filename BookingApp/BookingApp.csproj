@@ -254,6 +254,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AccommodationsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -267,6 +268,10 @@
     <Compile Include="Migrations\201706061059077_Kandji.cs" />
     <Compile Include="Migrations\201706061059077_Kandji.Designer.cs">
       <DependentUpon>201706061059077_Kandji.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706070829407_Migracija II.cs" />
+    <Compile Include="Migrations\201706070829407_Migracija II.Designer.cs">
+      <DependentUpon>201706070829407_Migracija II.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Accommodation.cs" />
@@ -367,6 +372,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706061059077_Kandji.resx">
       <DependentUpon>201706061059077_Kandji.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706070829407_Migracija II.resx">
+      <DependentUpon>201706070829407_Migracija II.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

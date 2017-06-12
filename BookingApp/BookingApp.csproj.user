@@ -9,6 +9,7 @@
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_DbContextTypeFullName>BookingApp.Models.BAContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
+    <UseIISExpress>true</UseIISExpress>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

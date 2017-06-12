@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,7 +10,10 @@ namespace BookingApp.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Code { get; set; }
+        public string Code { get; set; }
+        [JsonIgnore]
         public List<Region> Regions { get; set; }
+        public Country() { }
+
     }
 }

@@ -4,6 +4,7 @@ namespace BookingApp.Migrations
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -28,6 +29,7 @@ namespace BookingApp.Migrations
             //      new Person { FullName = "Brice Lambson" },
             //      new Person { FullName = "Rowan Miller" }
             //    );
+            //
 
             if (!context.Roles.Any(r => r.Name == "Admin"))
             {
@@ -56,44 +58,125 @@ namespace BookingApp.Migrations
                 manager.Create(role);
             }
 
+            var userStore = new UserStore<BAIdentityUser>(context);
+            var userManager = new UserManager<BAIdentityUser>(userStore);
 
-            context.AppUsers.AddOrUpdate(
-                  p => p.FullName,
-                  new AppUser() { FullName = "Admin Adminovic", Id = 1, Email = "admin@yahoo.com", Username = "admin", Password = "admin"}
-            );
-            context.AppUsers.AddOrUpdate(
-               p => p.FullName,
-               new AppUser() { FullName = "Menadzer Menadzerovic", Id = 2, Email = "menadzer@yahoo.com", Username = "mng", Password = "mng"}
-           );
-            context.AppUsers.AddOrUpdate(
-                p => p.FullName,
-                new AppUser() { FullName = "AppUser AppUserovic", Id = 3, Email = "appu@yahoo.com", Username = "appu", Password = "appu" }
-            );
+            if (!context.Users.Any(u => u.UserName == "admin"))
+            {
+                var user1 = new BAIdentityUser() { Id = "admin", UserName = "admin", Email = "admin@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("admin") };
+                userManager.Create(user1);
+                userManager.AddToRole(user1.Id, "Admin");
+            }
+
+            BAIdentityUser user = new BAIdentityUser() { Id = "branja", UserName = "branja", Email = "branko.savic94@gmail.com", PasswordHash = BAIdentityUser.HashPassword("branja") };
+
+            if (!context.Users.Any(u => u.UserName == "branja"))
+            {
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "Manager");
+            }
+
+            if (!context.Users.Any(u => u.UserName == "pepi"))
+            {
+                var user1 = new BAIdentityUser() { Id = "pepi", UserName = "pepi", Email = "branko.savic94@gmail.com", PasswordHash = BAIdentityUser.HashPassword("pepi") };
+                userManager.Create(user1);
+                userManager.AddToRole(user1.Id, "AppUser");
+            }
+
+            user.Accomodations = new List<Accommodation>();
+            user.Comments = new List<Comment>();
+            user.RoomReservations = new List<RoomReservations>();
 
             context.SaveChanges();
 
-            var userStore = new UserStore<BAIdentityUser>(context);
-            var userManager = new UserManager<BAIdentityUser>(userStore);
-            if (!context.Users.Any(u => u.UserName == "admin"))
+            Country country = new Country();
+            country.Id = 1;
+            country.Name = "Serbia";
+            country.Code = "RS";
+            country.Regions = new List<Region>();
+
+            Region region = new Region();
+            region.Country = country;
+            region.Id = 1;
+            region.Name = "Vojvodina";
+            region.Places = new List<Place>();
+            country.Regions.Add(region);
+
+            Place place = new Place();
+            place.Id = 1;
+            place.Name = "Vojvodina";
+            place.Region = region;
+            place.Accomodations = new List<Accommodation>();
+            region.Places.Add(place);
+
+            AccommodationType accType = new AccommodationType();
+            accType.Id = 1;
+            accType.Name = "acc Type";
+            accType.Accommodations = new List<Accommodation>();
+
+            Accommodation acc = new Accommodation();
+            acc.Id = 1;
+            acc.Address = "asd";
+            acc.Approved = false;
+            acc.AvrageGrade = 0;
+            acc.Comments = new List<Comment>();
+            acc.Description = "Opis";
+            acc.ImageURL = string.Empty;
+            acc.Latitude = 0;
+            acc.Longitude = 0;
+            acc.Name = "vilica";
+            acc.Owner = user;
+            acc.Place = place;
+            acc.Rooms = new List<Room>();
+            accType.Accommodations.Add(acc);
+            user.Accomodations.Add(acc);
+
+            Room room = new Room();
+            room.Accomodation = acc;
+            room.BedCount = 3;
+            room.Description = "sobice";
+            room.Id = 1; ;
+            room.PricePerNight = 100;
+            room.RoomNumber = 1;
+            room.RoomReservations = new List<RoomReservations>();
+            acc.Rooms.Add(room);
+
+            RoomReservations roomRes = new RoomReservations();
+            roomRes.EndDate = DateTime.Now;
+            roomRes.StartDate = DateTime.Now;
+            roomRes.Timestamp = DateTime.Now;
+            roomRes.User = user;
+            roomRes.Room = room;
+            roomRes.Id = 1;
+            user.RoomReservations.Add(roomRes);
+
+            Comment comm = new Comment();
+            comm.Accomodation = acc;
+            comm.Grade = 0;
+            comm.Text = "Dobra";
+            comm.User = user;
+            comm.Id = 1;
+            user.Comments.Add(comm);
+
+
+
+
+
+            try
             {
-                var _appUser = context.AppUsers.FirstOrDefault(a => a.FullName == "Admin Adminovic");
-                var user = new BAIdentityUser() { Id = "admin", UserName = "admin", Email = "admin@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("admin"), appUserId = _appUser.Id };
-                userManager.Create(user);
-                userManager.AddToRole(user.Id, "Admin");
+                context.Accommodations.Add(acc);
+                context.AccommodationTypes.Add(accType);
+                context.Comments.Add(comm);
+                context.Countries.Add(country);
+                context.Places.Add(place);
+                context.Regions.Add(region);
+                context.RoomReservationss.Add(roomRes);
+                context.Rooms.Add(room);
+                context.SaveChanges();
             }
-            if (!context.Users.Any(u => u.UserName == "mng"))
+            catch (Exception ex)
             {
-                var _appUser = context.AppUsers.FirstOrDefault(a => a.FullName == "Menadzer Menadzerovic");
-                var user = new BAIdentityUser() { Id = "mng", UserName = "mng", Email = "menadzer@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("mng"), appUserId = _appUser.Id };
-                userManager.Create(user);
-                userManager.AddToRole(user.Id, "Mng");
-            }
-            if (!context.Users.Any(u => u.UserName == "appu"))
-            {
-                var _appUser = context.AppUsers.FirstOrDefault(a => a.FullName == "AppUser AppUserovic");
-                var user = new BAIdentityUser() { Id = "appu", UserName = "appu", Email = "appu@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("appu"), appUserId = _appUser.Id };
-                userManager.Create(user);
-                userManager.AddToRole(user.Id, "AppUser");
+                Console.WriteLine(ex.Message);
             }
 
         }

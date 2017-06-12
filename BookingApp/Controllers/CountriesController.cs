@@ -20,14 +20,14 @@ namespace BookingApp.Controllers
         // GET: api/Countries
         public IQueryable<Country> GetCountrys()
         {
-            return db.Countrys;
+            return db.Countries;
         }
 
         // GET: api/Countries/5
         [ResponseType(typeof(Country))]
         public IHttpActionResult GetCountry(int id)
         {
-            Country country = db.Countrys.Find(id);
+            Country country = db.Countries.Find(id);
             if (country == null)
             {
                 return NotFound();
@@ -80,7 +80,7 @@ namespace BookingApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Countrys.Add(country);
+            db.Countries.Add(country);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = country.Id }, country);
@@ -90,13 +90,13 @@ namespace BookingApp.Controllers
         [ResponseType(typeof(Country))]
         public IHttpActionResult DeleteCountry(int id)
         {
-            Country country = db.Countrys.Find(id);
+            Country country = db.Countries.Find(id);
             if (country == null)
             {
                 return NotFound();
             }
 
-            db.Countrys.Remove(country);
+            db.Countries.Remove(country);
             db.SaveChanges();
 
             return Ok(country);
@@ -113,7 +113,7 @@ namespace BookingApp.Controllers
 
         private bool CountryExists(int id)
         {
-            return db.Countrys.Count(e => e.Id == id) > 0;
+            return db.Countries.Count(e => e.Id == id) > 0;
         }
     }
 }

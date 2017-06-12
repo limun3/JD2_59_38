@@ -10,8 +10,10 @@ namespace BookingApp.Models
         public int Id { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public int Timestamp { get; set; }//kog tipa ovo da bude
-        public AppUser User { get; set; }
+        public DateTime Timestamp { get; set; }
         public Room Room { get; set; }
+        public BAIdentityUser User { get; set; }
+        public RoomReservations() { }
+
     }
 }

@@ -63,22 +63,22 @@ namespace BookingApp.Migrations
 
             if (!context.Users.Any(u => u.UserName == "admin"))
             {
-                var user1 = new BAIdentityUser() { Id = "admin", UserName = "admin", Email = "admin@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("admin") };
+                var user1 = new BAIdentityUser() { Id = "admin", UserName = "admin", Email = "admin@gmail.com", PasswordHash = BAIdentityUser.HashPassword("admin") };
                 userManager.Create(user1);
                 userManager.AddToRole(user1.Id, "Admin");
             }
 
-            BAIdentityUser user = new BAIdentityUser() { Id = "branja", UserName = "branja", Email = "branko.savic94@gmail.com", PasswordHash = BAIdentityUser.HashPassword("branja") };
+            BAIdentityUser user = new BAIdentityUser() { Id = "kandji", UserName = "kandji", Email = "nkanjeric@gmail.com", PasswordHash = BAIdentityUser.HashPassword("kandjaman") };
 
-            if (!context.Users.Any(u => u.UserName == "branja"))
+            if (!context.Users.Any(u => u.UserName == "kandji"))
             {
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "Manager");
             }
 
-            if (!context.Users.Any(u => u.UserName == "pepi"))
+            if (!context.Users.Any(u => u.UserName == "alekso"))
             {
-                var user1 = new BAIdentityUser() { Id = "pepi", UserName = "pepi", Email = "branko.savic94@gmail.com", PasswordHash = BAIdentityUser.HashPassword("pepi") };
+                var user1 = new BAIdentityUser() { Id = "alekso", UserName = "alekso", Email = "aleksa.janjic@hotmail.com", PasswordHash = BAIdentityUser.HashPassword("lizaljke") };
                 userManager.Create(user1);
                 userManager.AddToRole(user1.Id, "AppUser");
             }
@@ -91,8 +91,8 @@ namespace BookingApp.Migrations
 
             Country country = new Country();
             country.Id = 1;
-            country.Name = "Serbia";
-            country.Code = "RS";
+            country.Name = "Srbija";
+            country.Code = "Srb";
             country.Regions = new List<Region>();
 
             Region region = new Region();
@@ -111,20 +111,20 @@ namespace BookingApp.Migrations
 
             AccommodationType accType = new AccommodationType();
             accType.Id = 1;
-            accType.Name = "acc Type";
+            accType.Name = "accType";
             accType.Accommodations = new List<Accommodation>();
 
             Accommodation acc = new Accommodation();
             acc.Id = 1;
-            acc.Address = "asd";
+            acc.Address = "addr";
             acc.Approved = false;
             acc.AvrageGrade = 0;
             acc.Comments = new List<Comment>();
-            acc.Description = "Opis";
+            acc.Description = "Desc1";
             acc.ImageURL = string.Empty;
             acc.Latitude = 0;
             acc.Longitude = 0;
-            acc.Name = "vilica";
+            acc.Name = "AccomName";
             acc.Owner = user;
             acc.Place = place;
             acc.Rooms = new List<Room>();
@@ -134,7 +134,7 @@ namespace BookingApp.Migrations
             Room room = new Room();
             room.Accomodation = acc;
             room.BedCount = 3;
-            room.Description = "sobice";
+            room.Description = "Room1";
             room.Id = 1; ;
             room.PricePerNight = 100;
             room.RoomNumber = 1;
@@ -153,7 +153,7 @@ namespace BookingApp.Migrations
             Comment comm = new Comment();
             comm.Accomodation = acc;
             comm.Grade = 0;
-            comm.Text = "Dobra";
+            comm.Text = "Sve je to super.";
             comm.User = user;
             comm.Id = 1;
             user.Comments.Add(comm);

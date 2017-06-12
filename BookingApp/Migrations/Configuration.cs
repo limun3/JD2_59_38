@@ -28,7 +28,7 @@ namespace BookingApp.Migrations
             //      new Person { FullName = "Brice Lambson" },
             //      new Person { FullName = "Rowan Miller" }
             //    );
-            //
+
             if (!context.Roles.Any(r => r.Name == "Admin"))
             {
                 var store = new RoleStore<IdentityRole>(context);
@@ -59,12 +59,17 @@ namespace BookingApp.Migrations
 
             context.AppUsers.AddOrUpdate(
                   p => p.FullName,
-                  new AppUser() { FullName = "Admin Adminovic" }
+                  new AppUser() { FullName = "Admin Adminovic", Id = 1, Email = "admin@yahoo.com", Username = "admin", Password = "admin"}
             );
             context.AppUsers.AddOrUpdate(
+               p => p.FullName,
+               new AppUser() { FullName = "Menadzer Menadzerovic", Id = 2, Email = "menadzer@yahoo.com", Username = "mng", Password = "mng"}
+           );
+            context.AppUsers.AddOrUpdate(
                 p => p.FullName,
-                new AppUser() { FullName = "AppUser AppUserovic" }
+                new AppUser() { FullName = "AppUser AppUserovic", Id = 3, Email = "appu@yahoo.com", Username = "appu", Password = "appu" }
             );
+
             context.SaveChanges();
 
             var userStore = new UserStore<BAIdentityUser>(context);
@@ -76,7 +81,13 @@ namespace BookingApp.Migrations
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "Admin");
             }
-
+            if (!context.Users.Any(u => u.UserName == "mng"))
+            {
+                var _appUser = context.AppUsers.FirstOrDefault(a => a.FullName == "Menadzer Menadzerovic");
+                var user = new BAIdentityUser() { Id = "mng", UserName = "mng", Email = "menadzer@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("mng"), appUserId = _appUser.Id };
+                userManager.Create(user);
+                userManager.AddToRole(user.Id, "Mng");
+            }
             if (!context.Users.Any(u => u.UserName == "appu"))
             {
                 var _appUser = context.AppUsers.FirstOrDefault(a => a.FullName == "AppUser AppUserovic");
@@ -84,6 +95,7 @@ namespace BookingApp.Migrations
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "AppUser");
             }
+
         }
     }
 }

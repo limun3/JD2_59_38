@@ -20,7 +20,7 @@ namespace BookingApp.Models
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<RoomReservations> RoomReservationss { get; set; }
 
-        public BAContext() : base("name=BADB")
+        public BAContext() : base("name=JD2_59_38")
         {            
         }
 
@@ -28,7 +28,5 @@ namespace BookingApp.Models
         {
             return new BAContext();
         }
-
-        public System.Data.Entity.DbSet<BookingApp.Models.BAIdentityUser> BAIdentityUsers { get; set; }
     }
 }

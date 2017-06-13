@@ -16,10 +16,10 @@ namespace BookingApp.Models
     public class BAIdentityUser : IdentityUser
     {
 
-        [ForeignKey("appUser")]
+        /*[ForeignKey("appUser")]
         public int appUserId { get; set; }
 
-        public AppUser appUser { get; set; }
+        public AppUser appUser { get; set; }*/
         [JsonIgnore]
         public List<Comment> Comments { get; set; }
         [JsonIgnore]

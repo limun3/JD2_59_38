@@ -258,7 +258,6 @@
     <Compile Include="Controllers\AccommodationTypesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AppUsersController.cs" />
-    <Compile Include="Controllers\BAIdentityUsersController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -282,6 +281,10 @@
     <Compile Include="Migrations\201706070829407_Migracija II.Designer.cs">
       <DependentUpon>201706070829407_Migracija II.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706130759029_Punjenje baze.cs" />
+    <Compile Include="Migrations\201706130759029_Punjenje baze.Designer.cs">
+      <DependentUpon>201706130759029_Punjenje baze.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Accommodation.cs" />
     <Compile Include="Models\AccommodationType.cs" />
@@ -296,7 +299,6 @@
     <Compile Include="Models\Region.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\RoomReservations.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Providers\CustomJwtFormat.cs" />
@@ -384,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706070829407_Migracija II.resx">
       <DependentUpon>201706070829407_Migracija II.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706130759029_Punjenje baze.resx">
+      <DependentUpon>201706130759029_Punjenje baze.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

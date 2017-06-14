@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Place } from '../place/place.model';
 import { Origins } from '../enumerations/origins.model';
-import { PlaceService } from '../services/place.service';
+import { PlaceService } from '../place/place.service';
 
 @Component({
   selector: 'place',
@@ -16,7 +16,7 @@ export class PlaceComponent implements OnInit {
   @Input() show: boolean = false;
   Origin : Origins = 'Place';
 
-   data: PlaceComponent[];
+   places: PlaceComponent[];
 
 /*
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
@@ -25,9 +25,9 @@ export class PlaceComponent implements OnInit {
 */
 constructor(private _service: PlaceService) { }
   ngOnInit() {
-        this._service.getData().subscribe(
-      (prod: any) => {this.data = prod; console.log(this.data)},//You can set the type to Product.
-      //error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+        this._service.getPlaces().subscribe(
+      (prod: any) => {this.places = prod; console.log(this.places)},//You can set the type to Product.
+      error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
     }
   

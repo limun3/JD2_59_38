@@ -16,7 +16,7 @@ import { AccommodationComponent } from './accommodation/accommodation.component'
 
 import { AccommodationService } from './services/accommodation.service';
 import { AuthenticationService } from './services/authentication.service';
-import { PlaceService } from './services/place.service';
+import { PlaceService } from './place/place.service';
 // const ChildRoutes = [
 //    {path: "child1", component: SecondComponent},
 //   ]

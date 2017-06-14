@@ -10,9 +10,9 @@ export class PlaceService{
 
     }
 
-    getData(): Observable<any> {
+    getPlaces(): Observable<any> {
 
-        return this.http.get("http://localhost:54042/api/places").map(this.extractData);        
+        return this.http.get("http://localhost:54042/api/place").map(this.extractData);        
     }
 
     private extractData(res: Response) {

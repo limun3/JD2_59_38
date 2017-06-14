@@ -89,6 +89,12 @@ namespace BookingApp.Migrations
 
             context.SaveChanges();
 
+            AppUser appUser = new AppUser();
+            appUser.Id = 1;
+            appUser.Name = "Juzer";
+            appUser.LastName = "Juzerovic";
+            appUser.Accommodations = new List<Accommodation>();
+
             Country country = new Country();
             country.Id = 1;
             country.Name = "Srbija";
@@ -160,6 +166,7 @@ namespace BookingApp.Migrations
             {
                 context.Accommodations.Add(acc);
                 context.AccommodationTypes.Add(accType);
+                context.AppUsers.Add(appUser);
                 context.Comments.Add(comm);
                 context.Countries.Add(country);
                 context.Places.Add(place);

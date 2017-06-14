@@ -1,3 +1,3 @@
 export class ConfigurationManager {
-    public static Host: string = "localhost:4200";
+    public static Host: string = "localhost:54042";
 }

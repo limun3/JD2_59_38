@@ -39,7 +39,6 @@ export class AuthenticationService {
     }
 
     getRole(): string {
-
         if(this.isLoggedIn()) {
             let token=localStorage.getItem("token");
              return JSON.parse(token).role;

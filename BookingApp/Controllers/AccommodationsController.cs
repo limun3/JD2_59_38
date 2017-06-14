@@ -1,6 +1,6 @@
-﻿using System;
+﻿using BookingApp.Models;
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -8,24 +8,27 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using BookingApp.Models;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
-    [Authorize]
-    public class AccommodationsController : ApiController
+    [RoutePrefix("api")]
+    public class AccommodationController : ApiController
     {
         private BAContext db = new BAContext();
 
-        // GET: api/Accommodations
-        public IQueryable<Accommodation> GetAccommodations()
+        [HttpGet]
+        [Route("Accommodations")]
+        [EnableQuery]
+        public IQueryable<Accommodation> m1()
         {
             return db.Accommodations;
         }
 
-        // GET: api/Accommodations/5
+        [HttpGet]
+        [Route("Accommodations/{id}")]
         [ResponseType(typeof(Accommodation))]
-        public IHttpActionResult GetAccommodation(int id)
+        public IHttpActionResult m2(int id)
         {
             Accommodation accommodation = db.Accommodations.Find(id);
             if (accommodation == null)
@@ -36,9 +39,59 @@ namespace BookingApp.Controllers
             return Ok(accommodation);
         }
 
-        // PUT: api/Accommodations/5
+        [HttpGet]
+        [EnableQuery]
+        [Route("Accommodations/CountryId/{id}")]
+        [ResponseType(typeof(Accommodation))]
+        public IQueryable<Accommodation> GetAccommodationsByCountryId(int id)
+        {
+            IQueryable<Accommodation> queryAccommodation =
+                                        from country in db.Countries
+                                        join region in db.Regions on country.Id equals region.CountryId
+                                        join place in db.Places on region.Id equals place.RegionId
+                                        join accommodation in db.Accommodations on place.Id equals accommodation.PlaceId
+                                        where country.Id == id
+                                        select accommodation;
+
+            return queryAccommodation;
+        }
+
+        [HttpGet]
+        [EnableQuery]
+        [Route("Accommodations/RegionId/{id}")]
+        [ResponseType(typeof(Accommodation))]
+        public IQueryable<Accommodation> GetAccommodationsByRegionId(int id)
+        {
+            IQueryable<Accommodation> queryAccommodation =
+                                        from region in db.Regions
+                                        join place in db.Places on region.Id equals place.RegionId
+                                        join accommodation in db.Accommodations on place.Id equals accommodation.PlaceId
+                                        where region.Id == id
+                                        select accommodation;
+
+            return queryAccommodation;
+        }
+
+        [HttpGet]
+        [EnableQuery]
+        [Route("Accommodations/PlaceId/{id}")]
+        [ResponseType(typeof(Accommodation))]
+        public IQueryable<Accommodation> GetAccommodationsByPlaceId(int id)
+        {
+            IQueryable<Accommodation> queryAccommodation =
+                                        from place in db.Places
+                                        join accommodation in db.Accommodations on place.Id equals accommodation.PlaceId
+                                        where place.Id == id
+                                        select accommodation;
+
+            return queryAccommodation;
+        }
+
+        [Authorize]
+        [HttpPut]
+        [Route("Accommodations/{id}")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAccommodation(int id, Accommodation accommodation)
+        public IHttpActionResult m3(int id, Accommodation accommodation)
         {
             if (!ModelState.IsValid)
             {
@@ -71,7 +124,9 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Accommodations
+        [Authorize]
+        [HttpPost]
+        [Route("Accommodations")]
         [ResponseType(typeof(Accommodation))]
         public IHttpActionResult PostAccommodation(Accommodation accommodation)
         {
@@ -83,10 +138,12 @@ namespace BookingApp.Controllers
             db.Accommodations.Add(accommodation);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = accommodation.Id }, accommodation);
+            return CreatedAtRoute("DefaultApi", new { controller = "Accommodation", id = accommodation.Id }, accommodation);
         }
 
-        // DELETE: api/Accommodations/5
+        [Authorize]
+        [HttpDelete]
+        [Route("Accommodations/{id}")]
         [ResponseType(typeof(Accommodation))]
         public IHttpActionResult DeleteAccommodation(int id)
         {

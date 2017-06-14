@@ -1,6 +1,6 @@
-﻿using System;
+﻿using BookingApp.Models;
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -8,22 +8,27 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using BookingApp.Models;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
-    [Authorize]
-    public class RegionsController : ApiController
+    [RoutePrefix("api")]
+    public class RegionController : ApiController
     {
         private BAContext db = new BAContext();
 
         // GET: api/Regions
+        [HttpGet]
+        [EnableQuery]
+        [Route("Regions")]
         public IQueryable<Region> GetRegions()
         {
             return db.Regions;
         }
 
         // GET: api/Regions/5
+        [HttpGet]
+        [Route("Regions/{id}")]
         [ResponseType(typeof(Region))]
         public IHttpActionResult GetRegion(int id)
         {
@@ -37,6 +42,8 @@ namespace BookingApp.Controllers
         }
 
         // PUT: api/Regions/5
+        [HttpPut]
+        [Route("Regions/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutRegion(int id, Region region)
         {
@@ -72,7 +79,9 @@ namespace BookingApp.Controllers
         }
 
         // POST: api/Regions
-        [ResponseType(typeof(Region))]
+        [HttpPost]
+        [Route("Regions")]
+        [ResponseType(typeof(Place))]
         public IHttpActionResult PostRegion(Region region)
         {
             if (!ModelState.IsValid)
@@ -83,10 +92,12 @@ namespace BookingApp.Controllers
             db.Regions.Add(region);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = region.Id }, region);
+            return CreatedAtRoute("DefaultApi", new { controller = "Region", Id = region.Id }, region);
         }
 
         // DELETE: api/Regions/5
+        [HttpDelete]
+        [Route("Regions/{id}")]
         [ResponseType(typeof(Region))]
         public IHttpActionResult DeleteRegion(int id)
         {
@@ -111,9 +122,10 @@ namespace BookingApp.Controllers
             base.Dispose(disposing);
         }
 
+
         private bool RegionExists(int id)
         {
-            return db.Regions.Count(e => e.Id == id) > 0;
+            return db.Places.Count(e => e.Id == id) > 0;
         }
     }
 }

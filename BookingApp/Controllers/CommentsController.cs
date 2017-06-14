@@ -1,6 +1,6 @@
-﻿using System;
+﻿using BookingApp.Models;
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -8,26 +8,29 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using BookingApp.Models;
 
 namespace BookingApp.Controllers
 {
-    [Authorize]
-    public class CommentsController : ApiController
+    [RoutePrefix("api")]
+    public class CommentController : ApiController
     {
         private BAContext db = new BAContext();
 
         // GET: api/Comments
+        [HttpGet]
+        [Route("Comments")]
         public IQueryable<Comment> GetComments()
         {
             return db.Comments;
         }
 
         // GET: api/Comments/5
+        [HttpGet]
+        [Route("Comments/{id1}/{id2}")]
         [ResponseType(typeof(Comment))]
-        public IHttpActionResult GetComment(int id)
+        public IHttpActionResult GetComment(int id1, int id2)
         {
-            Comment comment = db.Comments.Find(id);
+            Comment comment = db.Comments.Find(new { AppUserId = id1, AccommodationId = id2 });
             if (comment == null)
             {
                 return NotFound();
@@ -37,15 +40,18 @@ namespace BookingApp.Controllers
         }
 
         // PUT: api/Comments/5
+        [HttpPut]
+        [Authorize]
+        [Route("Comments")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutComment(int id, Comment comment)
+        public IHttpActionResult PutComments(int id1, int id2, Comment comment)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != comment.Id)
+            if (id1 != comment.AppUserId || id2 != comment.AccommodationId)
             {
                 return BadRequest();
             }
@@ -58,7 +64,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CommentExists(id))
+                if (!CommentExists(id1, id2))
                 {
                     return NotFound();
                 }
@@ -72,6 +78,9 @@ namespace BookingApp.Controllers
         }
 
         // POST: api/Comments
+        [HttpPost]
+        [Authorize]
+        [Route("Comments")]
         [ResponseType(typeof(Comment))]
         public IHttpActionResult PostComment(Comment comment)
         {
@@ -83,14 +92,17 @@ namespace BookingApp.Controllers
             db.Comments.Add(comment);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = comment.Id }, comment);
+            return CreatedAtRoute("DefaultApi", new { controller = "Comment" /*, Id = place.Id*/ }, comment);
         }
 
         // DELETE: api/Comments/5
+        [HttpDelete]
+        [Authorize]
+        [Route("Comments/{id1}/{id2}")]
         [ResponseType(typeof(Comment))]
-        public IHttpActionResult DeleteComment(int id)
+        public IHttpActionResult DeleteComment(int id1, int id2)
         {
-            Comment comment = db.Comments.Find(id);
+            Comment comment = db.Comments.Find(new { AppUserId = id1, AccommodationId = id2 });
             if (comment == null)
             {
                 return NotFound();
@@ -111,9 +123,14 @@ namespace BookingApp.Controllers
             base.Dispose(disposing);
         }
 
-        private bool CommentExists(int id)
+
+        private bool CommentExists(int id1, int id2)
         {
-            return db.Comments.Count(e => e.Id == id) > 0;
+            Comment comment = db.Comments.Find(new { AppUserId = id1, AccommodationId = id2 });
+            if (comment == null)
+                return false;
+
+            return true;
         }
     }
 }

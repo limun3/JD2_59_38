@@ -1,6 +1,6 @@
-﻿using System;
+﻿using BookingApp.Models;
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -8,22 +8,27 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using BookingApp.Models;
+using System.Web.Http.OData;
 
 namespace BookingApp.Controllers
 {
-    [Authorize]
-    public class PlacesController : ApiController
+    [RoutePrefix("api")]
+    public class PlaceController : ApiController
     {
         private BAContext db = new BAContext();
 
         // GET: api/Places
+        [HttpGet]
+        [EnableQuery]
+        [Route("Places")]
         public IQueryable<Place> GetPlaces()
         {
             return db.Places;
         }
 
         // GET: api/Places/5
+        [HttpGet]
+        [Route("Places/{id}")]
         [ResponseType(typeof(Place))]
         public IHttpActionResult GetPlace(int id)
         {
@@ -37,6 +42,9 @@ namespace BookingApp.Controllers
         }
 
         // PUT: api/Places/5
+        [HttpPut]
+        [Authorize]
+        [Route("Places/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutPlace(int id, Place place)
         {
@@ -72,6 +80,9 @@ namespace BookingApp.Controllers
         }
 
         // POST: api/Places
+        [HttpPost]
+        [Authorize]
+        [Route("Places")]
         [ResponseType(typeof(Place))]
         public IHttpActionResult PostPlace(Place place)
         {
@@ -83,10 +94,13 @@ namespace BookingApp.Controllers
             db.Places.Add(place);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = place.Id }, place);
+            return CreatedAtRoute("DefaultApi", new { controller = "Place", Id = place.Id }, place);
         }
 
         // DELETE: api/Places/5
+        [HttpDelete]
+        [Authorize]
+        [Route("Places/{id}")]
         [ResponseType(typeof(Place))]
         public IHttpActionResult DeletePlace(int id)
         {
@@ -110,6 +124,7 @@ namespace BookingApp.Controllers
             }
             base.Dispose(disposing);
         }
+
 
         private bool PlaceExists(int id)
         {

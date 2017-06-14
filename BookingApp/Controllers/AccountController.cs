@@ -67,6 +67,7 @@ namespace BookingApp.Controllers
         }
 
         // POST api/Account/Logout
+        //[AllowAnonymous]
         [Route("Logout")]
         public IHttpActionResult Logout()
         {
@@ -125,7 +126,7 @@ namespace BookingApp.Controllers
 
             IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword,
                 model.NewPassword);
-            
+
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -258,9 +259,9 @@ namespace BookingApp.Controllers
             if (hasRegistered)
             {
                 Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                
-                 ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
-                    OAuthDefaults.AuthenticationType);
+
+                ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(UserManager,
+                   OAuthDefaults.AuthenticationType);
                 ClaimsIdentity cookieIdentity = await user.GenerateUserIdentityAsync(UserManager,
                     CookieAuthenticationDefaults.AuthenticationType);
 
@@ -322,22 +323,37 @@ namespace BookingApp.Controllers
         [AllowAnonymous]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
+        //public IHttpActionResult Register(RegisterBindingModel model)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            var user = new BAIdentityUser() { UserName = model.Email, Email = model.Email };
+            AppUser appUser = new AppUser() { Name = model.Name, LastName = model.LastName };
+            string BaIdentityUserId = Guid.NewGuid().ToString();
+            var user = new BAIdentityUser() { Id = BaIdentityUserId, UserName = model.Email, Email = model.Email, AppUser = appUser, PasswordHash = BAIdentityUser.HashPassword(model.Password) };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+            //IdentityResult result = UserManager.Create(user);
 
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
             }
 
+            UserManager.AddToRole(BaIdentityUserId, model.Role);
+
             return Ok();
+
+
+            /*
+                    if (!context.Users.Any(u => u.UserName == "admin"))
+                    {
+                        var user = new BAIdentityUser() { Id = "admin", UserName = "admin", Email = "admin@yahoo.com", PasswordHash = BAIdentityUser.HashPassword("admin") };
+                        userManager.Create(user);
+                        userManager.AddToRole(user.Id, "Admin");
+                    }*/
         }
 
         // POST api/Account/RegisterExternal
@@ -368,7 +384,7 @@ namespace BookingApp.Controllers
             result = await UserManager.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {
-                return GetErrorResult(result); 
+                return GetErrorResult(result);
             }
             return Ok();
         }

@@ -83,9 +83,9 @@ namespace BookingApp.Migrations
                 userManager.AddToRole(user1.Id, "AppUser");
             }
 
-            user.Accomodations = new List<Accommodation>();
-            user.Comments = new List<Comment>();
-            user.RoomReservations = new List<RoomReservations>();
+            //user.Accomodations = new List<Accommodation>();
+            //user.Comments = new List<Comment>();
+            //user.RoomReservations = new List<RoomReservations>();
 
             context.SaveChanges();
 
@@ -106,7 +106,7 @@ namespace BookingApp.Migrations
             place.Id = 1;
             place.Name = "Vojvodina";
             place.Region = region;
-            place.Accomodations = new List<Accommodation>();
+            place.Accommodations = new List<Accommodation>();
             region.Places.Add(place);
 
             AccommodationType accType = new AccommodationType();
@@ -118,21 +118,21 @@ namespace BookingApp.Migrations
             acc.Id = 1;
             acc.Address = "addr";
             acc.Approved = false;
-            acc.AvrageGrade = 0;
+            acc.AverageGrade = 0;
             acc.Comments = new List<Comment>();
             acc.Description = "Desc1";
-            acc.ImageURL = string.Empty;
+            acc.ImageUrl = string.Empty;
             acc.Latitude = 0;
             acc.Longitude = 0;
             acc.Name = "AccomName";
-            acc.Owner = user;
+            //acc.Owner = user;
             acc.Place = place;
             acc.Rooms = new List<Room>();
             accType.Accommodations.Add(acc);
-            user.Accomodations.Add(acc);
+    
 
             Room room = new Room();
-            room.Accomodation = acc;
+            room.Accommodation = acc;
             room.BedCount = 3;
             room.Description = "Room1";
             room.Id = 1; ;
@@ -142,25 +142,19 @@ namespace BookingApp.Migrations
             acc.Rooms.Add(room);
 
             RoomReservations roomRes = new RoomReservations();
-            roomRes.EndDate = DateTime.Now;
+            roomRes.EndData = DateTime.Now;
             roomRes.StartDate = DateTime.Now;
-            roomRes.Timestamp = DateTime.Now;
-            roomRes.User = user;
+            roomRes.TimeStamp = DateTime.Now;
+           // roomRes.AppUser = user;
             roomRes.Room = room;
             roomRes.Id = 1;
-            user.RoomReservations.Add(roomRes);
 
             Comment comm = new Comment();
-            comm.Accomodation = acc;
+            comm.AccommodationId = acc.Id;
             comm.Grade = 0;
             comm.Text = "Sve je to super.";
-            comm.User = user;
-            comm.Id = 1;
-            user.Comments.Add(comm);
-
-
-
-
+           // comm.AppUser = user;
+            comm.AppUserId = 1;
 
             try
             {
@@ -170,7 +164,7 @@ namespace BookingApp.Migrations
                 context.Countries.Add(country);
                 context.Places.Add(place);
                 context.Regions.Add(region);
-                context.RoomReservationss.Add(roomRes);
+                context.RoomReservations.Add(roomRes);
                 context.Rooms.Add(room);
                 context.SaveChanges();
             }

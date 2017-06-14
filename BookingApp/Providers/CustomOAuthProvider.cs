@@ -41,6 +41,27 @@ namespace BookingApp.Providers
                 return;
             }
 
+            BAContext db = new BAContext();
+
+            var userRole = user.Roles.FirstOrDefault();
+            var role = db.Roles.SingleOrDefault(r => r.Id == userRole.RoleId);
+            var roleName = role?.Name;
+
+            if (roleName == "Admin")
+            {
+                context.OwinContext.Response.Headers.Add("Role", new[] { "Admin" });
+            }
+            else if (roleName == "Manager")
+            {
+                context.OwinContext.Response.Headers.Add("Role", new[] { "Manager" });
+            }
+            else
+            {
+                context.OwinContext.Response.Headers.Add("Role", new[] { "User" });
+            }
+
+            context.OwinContext.Response.Headers.Add("Access-Control-Expose-Headers", new[] { "Role" });
+
             //if (!user.EmailConfirmed)
             //{
             //    context.SetError("invalid_grant", "AppUser did not confirm email.");

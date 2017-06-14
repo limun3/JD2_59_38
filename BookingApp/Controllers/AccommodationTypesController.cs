@@ -1,6 +1,7 @@
-﻿using System;
+﻿using BookingApp.Models;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -8,22 +9,23 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using BookingApp.Models;
 
 namespace BookingApp.Controllers
 {
-    [Authorize]
-    public class AccommodationTypesController : ApiController
+    [RoutePrefix("api")]
+    public class AccommodationTypeController : ApiController
     {
         private BAContext db = new BAContext();
 
-        // GET: api/AccommodationTypes
+        [HttpGet]
+        [Route("AccommodationTypes")]
         public IQueryable<AccommodationType> GetAccommodationTypes()
         {
             return db.AccommodationTypes;
         }
 
-        // GET: api/AccommodationTypes/5
+        [HttpGet]
+        [Route("AccommodationTypes/{id}")]
         [ResponseType(typeof(AccommodationType))]
         public IHttpActionResult GetAccommodationType(int id)
         {
@@ -36,7 +38,9 @@ namespace BookingApp.Controllers
             return Ok(accommodationType);
         }
 
-        // PUT: api/AccommodationTypes/5
+        [Authorize]
+        [HttpPut]
+        [Route("AccommodationTypes/{id}")]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAccommodationType(int id, AccommodationType accommodationType)
         {
@@ -62,6 +66,10 @@ namespace BookingApp.Controllers
                 {
                     return NotFound();
                 }
+                else if (AccommodationTypeNameExists(accommodationType.Name))
+                {
+                    return BadRequest();
+                }
                 else
                 {
                     throw;
@@ -71,7 +79,9 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/AccommodationTypes
+        [Authorize]
+        [HttpPost]
+        [Route("AccommodationTypes")]
         [ResponseType(typeof(AccommodationType))]
         public IHttpActionResult PostAccommodationType(AccommodationType accommodationType)
         {
@@ -79,14 +89,19 @@ namespace BookingApp.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            if (AccommodationTypeNameExists(accommodationType.Name))
+            {
+                return BadRequest(ModelState);
+            }
             db.AccommodationTypes.Add(accommodationType);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = accommodationType.Id }, accommodationType);
+            return CreatedAtRoute("DefaultApi", new { controller = "AccommodationType", id = accommodationType.Id }, accommodationType);
         }
 
-        // DELETE: api/AccommodationTypes/5
+        [Authorize]
+        [HttpDelete]
+        [Route("AccommodationTypes/{id}")]
         [ResponseType(typeof(AccommodationType))]
         public IHttpActionResult DeleteAccommodationType(int id)
         {
@@ -114,6 +129,11 @@ namespace BookingApp.Controllers
         private bool AccommodationTypeExists(int id)
         {
             return db.AccommodationTypes.Count(e => e.Id == id) > 0;
+        }
+
+        private bool AccommodationTypeNameExists(string name)
+        {
+            return db.AccommodationTypes.Count(e => e.Name == name) > 0;
         }
     }
 }

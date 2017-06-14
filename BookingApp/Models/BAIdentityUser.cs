@@ -7,25 +7,16 @@ using System;
 using System.Security.Cryptography;
 using System.Collections;
 using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace BookingApp.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class BAIdentityUser : IdentityUser
     {
+        [ForeignKey("AppUser")]
+        public int? AppUserId { get; set; }
 
-        /*[ForeignKey("appUser")]
-        public int appUserId { get; set; }
-
-        public AppUser appUser { get; set; }*/
-        [JsonIgnore]
-        public List<Comment> Comments { get; set; }
-        [JsonIgnore]
-        public List<RoomReservations> RoomReservations { get; set; }
-        [JsonIgnore]
-        public List<Accommodation> Accomodations { get; set; }
+        public AppUser AppUser { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<BAIdentityUser> manager, string authenticationType)
         {

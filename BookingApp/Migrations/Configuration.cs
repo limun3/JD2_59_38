@@ -1,36 +1,23 @@
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
+using BookingApp.Models;
+
 namespace BookingApp.Migrations
 {
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
-    using Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<BookingApp.Models.BAContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<BAContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(BookingApp.Models.BAContext context)
+        protected override void Seed(BAContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
-
             if (!context.Roles.Any(r => r.Name == "Admin"))
             {
                 var store = new RoleStore<IdentityRole>(context);
@@ -68,37 +55,31 @@ namespace BookingApp.Migrations
                 userManager.AddToRole(user1.Id, "Admin");
             }
 
-            BAIdentityUser user = new BAIdentityUser() { Id = "kandji", UserName = "kandji", Email = "nkanjeric@gmail.com", PasswordHash = BAIdentityUser.HashPassword("kandjaman") };
+            BAIdentityUser user = new BAIdentityUser() { Id = "user1", UserName = "user1", Email = "user1@gmail.com", PasswordHash = BAIdentityUser.HashPassword("user") };
 
-            if (!context.Users.Any(u => u.UserName == "kandji"))
+            if (!context.Users.Any(u => u.UserName == "user1"))
             {
                 userManager.Create(user);
                 userManager.AddToRole(user.Id, "Manager");
             }
 
-            if (!context.Users.Any(u => u.UserName == "alekso"))
+            if (!context.Users.Any(u => u.UserName == "user2"))
             {
-                var user1 = new BAIdentityUser() { Id = "alekso", UserName = "alekso", Email = "aleksa.janjic@hotmail.com", PasswordHash = BAIdentityUser.HashPassword("lizaljke") };
+                var user1 = new BAIdentityUser() { Id = "user2", UserName = "user2", Email = "user2@gmail.com", PasswordHash = BAIdentityUser.HashPassword("user") };
                 userManager.Create(user1);
                 userManager.AddToRole(user1.Id, "AppUser");
             }
 
-            //user.Accomodations = new List<Accommodation>();
-            //user.Comments = new List<Comment>();
-            //user.RoomReservations = new List<RoomReservations>();
+            user.Accomodations = new List<Accommodation>();
+            user.Comments = new List<Comment>();
+            user.RoomReservations = new List<RoomReservation>();
 
             context.SaveChanges();
 
-            AppUser appUser = new AppUser();
-            appUser.Id = 1;
-            appUser.Name = "Juzer";
-            appUser.LastName = "Juzerovic";
-            appUser.Accommodations = new List<Accommodation>();
-
             Country country = new Country();
             country.Id = 1;
-            country.Name = "Srbija";
-            country.Code = "Srb";
+            country.Name = "Serbia";
+            country.Code = "RS";
             country.Regions = new List<Region>();
 
             Region region = new Region();
@@ -110,63 +91,64 @@ namespace BookingApp.Migrations
 
             Place place = new Place();
             place.Id = 1;
-            place.Name = "Vojvodina";
+            place.Name = "Novi Sad";
             place.Region = region;
-            place.Accommodations = new List<Accommodation>();
+            place.Accomodations = new List<Accommodation>();
             region.Places.Add(place);
 
             AccommodationType accType = new AccommodationType();
             accType.Id = 1;
-            accType.Name = "accType";
+            accType.Name = "Lux";
             accType.Accommodations = new List<Accommodation>();
 
             Accommodation acc = new Accommodation();
             acc.Id = 1;
-            acc.Address = "addr";
+            acc.Address = "Hanke Paldum 22";
             acc.Approved = false;
-            acc.AverageGrade = 0;
+            acc.AverageGrade = 5;
             acc.Comments = new List<Comment>();
-            acc.Description = "Desc1";
+            acc.Description = "Lux apartmants.";
             acc.ImageUrl = string.Empty;
             acc.Latitude = 0;
             acc.Longitude = 0;
-            acc.Name = "AccomName";
-            //acc.Owner = user;
+            acc.Name = "Luxy";
+            acc.Owner = user;
             acc.Place = place;
             acc.Rooms = new List<Room>();
             accType.Accommodations.Add(acc);
-    
+            user.Accomodations.Add(acc);
 
             Room room = new Room();
-            room.Accommodation = acc;
-            room.BedCount = 3;
-            room.Description = "Room1";
+            room.Accomodation = acc;
+            room.BedCount = 2;
+            room.Description = "Soba 704";
             room.Id = 1; ;
-            room.PricePerNight = 100;
+            room.PricePerNight = 56;
             room.RoomNumber = 1;
-            room.RoomReservations = new List<RoomReservations>();
+            room.RoomReservations = new List<RoomReservation>();
             acc.Rooms.Add(room);
 
-            RoomReservations roomRes = new RoomReservations();
-            roomRes.EndData = DateTime.Now;
+            RoomReservation roomRes = new RoomReservation();
+            roomRes.EndDate = DateTime.Now;
             roomRes.StartDate = DateTime.Now;
-            roomRes.TimeStamp = DateTime.Now;
-           // roomRes.AppUser = user;
+            roomRes.Timestamp = DateTime.Now;
+            roomRes.User = user;
             roomRes.Room = room;
             roomRes.Id = 1;
+            user.RoomReservations.Add(roomRes);
 
             Comment comm = new Comment();
-            comm.AccommodationId = acc.Id;
-            comm.Grade = 0;
-            comm.Text = "Sve je to super.";
-           // comm.AppUser = user;
-            comm.AppUserId = 1;
+            comm.Accomodation = acc;
+            comm.Grade = 4;
+            comm.Text = "Bravissimo.";
+            comm.User = user;
+            comm.Id = 1;
+            user.Comments.Add(comm);
 
             try
             {
                 context.Accommodations.Add(acc);
                 context.AccommodationTypes.Add(accType);
-                context.AppUsers.Add(appUser);
                 context.Comments.Add(comm);
                 context.Countries.Add(country);
                 context.Places.Add(place);
@@ -179,7 +161,6 @@ namespace BookingApp.Migrations
             {
                 Console.WriteLine(ex.Message);
             }
-
         }
     }
 }

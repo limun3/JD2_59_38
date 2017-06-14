@@ -12,46 +12,44 @@ using BookingApp.Models;
 
 namespace BookingApp.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    public class AppUsersController : ApiController
+    public class CountryController : ApiController
     {
-
         private BAContext db = new BAContext();
 
-        // GET: api/AppUsers
-        public IQueryable<AppUser> GetAppUsers()
+        // GET: api/Country
+        public IQueryable<Country> GetCountries()
         {
-            return db.AppUsers;
+            return db.Countries;
         }
 
-        // GET: api/AppUsers/5
-        [ResponseType(typeof(AppUser))]
-        public IHttpActionResult GetAppUser(int id)
+        // GET: api/Country/5
+        [ResponseType(typeof(Country))]
+        public IHttpActionResult GetCountry(int id)
         {
-            AppUser appUser = db.AppUsers.Find(id);
-            if (appUser == null)
+            Country country = db.Countries.Find(id);
+            if (country == null)
             {
                 return NotFound();
             }
 
-            return Ok(appUser);
+            return Ok(country);
         }
 
-        // PUT: api/AppUsers/5
+        // PUT: api/Country/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutAppUser(int id, AppUser appUser)
+        public IHttpActionResult PutCountry(int id, Country country)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != appUser.Id)
+            if (id != country.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(appUser).State = EntityState.Modified;
+            db.Entry(country).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +57,7 @@ namespace BookingApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AppUserExists(id))
+                if (!CountryExists(id))
                 {
                     return NotFound();
                 }
@@ -72,35 +70,35 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/AppUsers
-        [ResponseType(typeof(AppUser))]
-        public IHttpActionResult PostAppUser(AppUser appUser)
+        // POST: api/Country
+        [ResponseType(typeof(Country))]
+        public IHttpActionResult PostCountry(Country country)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.AppUsers.Add(appUser);
+            db.Countries.Add(country);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = appUser.Id }, appUser);
+            return CreatedAtRoute("DefaultApi", new { id = country.Id }, country);
         }
 
-        // DELETE: api/AppUsers/5
-        [ResponseType(typeof(AppUser))]
-        public IHttpActionResult DeleteAppUser(int id)
+        // DELETE: api/Country/5
+        [ResponseType(typeof(Country))]
+        public IHttpActionResult DeleteCountry(int id)
         {
-            AppUser appUser = db.AppUsers.Find(id);
-            if (appUser == null)
+            Country country = db.Countries.Find(id);
+            if (country == null)
             {
                 return NotFound();
             }
 
-            db.AppUsers.Remove(appUser);
+            db.Countries.Remove(country);
             db.SaveChanges();
 
-            return Ok(appUser);
+            return Ok(country);
         }
 
         protected override void Dispose(bool disposing)
@@ -112,9 +110,9 @@ namespace BookingApp.Controllers
             base.Dispose(disposing);
         }
 
-        private bool AppUserExists(int id)
+        private bool CountryExists(int id)
         {
-            return db.AppUsers.Count(e => e.Id == id) > 0;
+            return db.Countries.Count(e => e.Id == id) > 0;
         }
     }
 }

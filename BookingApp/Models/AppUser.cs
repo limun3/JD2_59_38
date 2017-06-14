@@ -18,9 +18,9 @@ namespace BookingApp.Models
         [MaxLength(20)]
         public String LastName { get; set; }
 
-        public IList<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; }
 
-        public IList<RoomReservations> RoomReservations { get; set; }
+        public List<RoomReservation> RoomReservations { get; set; }
 
         public List<Accommodation> Accommodations { get; set; }
     }

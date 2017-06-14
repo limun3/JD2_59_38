@@ -6,13 +6,14 @@ using System.Web;
 
 namespace BookingApp.Models
 {
-    public class Comment
+    public class RoomReservation
     {
         public int Id { get; set; }
-        public int Grade { get; set; }
-        public string Text { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+        public DateTime Timestamp { get; set; }
+        public Room Room { get; set; }
         public BAIdentityUser User { get; set; }
-        public Accommodation Accomodation { get; set; }
-        public Comment() { }
+        public RoomReservation() { }
     }
 }

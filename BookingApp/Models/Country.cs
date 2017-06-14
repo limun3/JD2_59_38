@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,15 +10,10 @@ namespace BookingApp.Models
     public class Country
     {
         public int Id { get; set; }
-
-        [Required]
-        [MaxLength(50)]
-        public String Name { get; set; }
-
-        [Required]
-        [MaxLength(10)]
-        public String Code { get; set; }
-
-        public IList<Region> Regions { get; set; }
+        public string Name { get; set; }
+        public string Code { get; set; }
+        [JsonIgnore]
+        public List<Region> Regions { get; set; }
+        public Country() { }
     }
 }

@@ -1,6 +1,6 @@
-﻿using BookingApp.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -8,31 +8,25 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.OData;
+using BookingApp.Models;
 
 namespace BookingApp.Controllers
 {
-    [RoutePrefix("api")]
     public class RegionController : ApiController
     {
         private BAContext db = new BAContext();
 
-        // GET: api/Regions
-        [HttpGet]
-        [EnableQuery]
-        [Route("Regions")]
+        // GET: api/Region
         public IQueryable<Region> GetRegions()
         {
-            return db.Regions;
+            return db.Regions.Include(u => u.Country);
         }
 
-        // GET: api/Regions/5
-        [HttpGet]
-        [Route("Regions/{id}")]
+        // GET: api/Region/5
         [ResponseType(typeof(Region))]
         public IHttpActionResult GetRegion(int id)
         {
-            Region region = db.Regions.Find(id);
+            Region region = db.Regions.Include(u => u.Country).SingleOrDefault(u => u.Id == id);
             if (region == null)
             {
                 return NotFound();
@@ -41,9 +35,7 @@ namespace BookingApp.Controllers
             return Ok(region);
         }
 
-        // PUT: api/Regions/5
-        [HttpPut]
-        [Route("Regions/{id}")]
+        // PUT: api/Region/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutRegion(int id, Region region)
         {
@@ -78,10 +70,8 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Regions
-        [HttpPost]
-        [Route("Regions")]
-        [ResponseType(typeof(Place))]
+        // POST: api/Region
+        [ResponseType(typeof(Region))]
         public IHttpActionResult PostRegion(Region region)
         {
             if (!ModelState.IsValid)
@@ -92,12 +82,10 @@ namespace BookingApp.Controllers
             db.Regions.Add(region);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { controller = "Region", Id = region.Id }, region);
+            return CreatedAtRoute("DefaultApi", new { id = region.Id }, region);
         }
 
-        // DELETE: api/Regions/5
-        [HttpDelete]
-        [Route("Regions/{id}")]
+        // DELETE: api/Region/5
         [ResponseType(typeof(Region))]
         public IHttpActionResult DeleteRegion(int id)
         {
@@ -122,10 +110,9 @@ namespace BookingApp.Controllers
             base.Dispose(disposing);
         }
 
-
         private bool RegionExists(int id)
         {
-            return db.Places.Count(e => e.Id == id) > 0;
+            return db.Regions.Count(e => e.Id == id) > 0;
         }
     }
 }

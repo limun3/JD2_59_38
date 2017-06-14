@@ -48,19 +48,6 @@ namespace BookingApp.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
-        [Required]
-        [Display(Name = "Name")]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
-        public string Name { get; set; }
-
-        [Required]
-        [Display(Name = "Last Name")]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
-        public string LastName { get; set; }
-
-        [Required]
-        public string Role { get; set; }
     }
 
     public class RegisterExternalBindingModel

@@ -18,7 +18,7 @@ namespace BookingApp.Models
         public DbSet<Region> Regions { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<RoomReservations> RoomReservations { get; set; }
+        public DbSet<RoomReservation> RoomReservations { get; set; }
 
         public BAContext() : base("name=JD2_59_38")
         {

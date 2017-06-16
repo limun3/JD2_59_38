@@ -39,6 +39,7 @@ export class AuthenticationService {
     }
 
     getRole(): string {
+
         if(this.isLoggedIn()) {
             let token=localStorage.getItem("token");
              return JSON.parse(token).role;
@@ -49,6 +50,11 @@ export class AuthenticationService {
     }
 
     getOwnerId(): number {
+       let token=localStorage.getItem("token");
+        return JSON.parse(token).userId;
+    }
+
+    getUserId(): number {
         let token=localStorage.getItem("token");
         return JSON.parse(token).userId;
     }

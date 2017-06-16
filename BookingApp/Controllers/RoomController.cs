@@ -28,7 +28,7 @@ namespace BookingApp.Controllers
                 return Ok(room);
             }
         }
-
+        [HttpGet]
         public IQueryable GetRooms()
         {
             return db.Rooms.Include(u => u.Accomodation);

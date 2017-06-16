@@ -32,12 +32,14 @@ namespace BookingApp.Controllers
                 return Ok(accomodation);
             }
         }
-
+        [HttpGet]
+        [ResponseType(typeof(Accommodation))]
         public IQueryable GetAccommodations()
         {
-            return db.Accommodations.Include(u => u.AccomodationType).
-                Include(u => u.Place).
-                Include(u => u.Owner);
+            return db.Accommodations;
+            //return db.Accommodations.Include(u => u.AccomodationType).
+            //    Include(u => u.Place).
+            //    Include(u => u.Owner);
         }
 
         [ResponseType(typeof(void))]

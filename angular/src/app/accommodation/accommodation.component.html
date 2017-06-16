@@ -1,9 +1,13 @@
 <table border="1">
         <tr>
-            <th>id</th><th>Full Name</th><th>Username</th>
+            <th>id</th><th>Full Name</th><th>Address</th><th>AverageGrade</th><th>Latitude</th><th>Longitude</th>
         <tr>
-        <tr *ngFor="let d of data;let i = index;">
-           
-            <td>{{d.Id}}</td>
+        <tr *ngFor="let a of accommon;let i = index;">
+            <td>{{a.Id}}</td>
+            <td>{{a.Name}}</td>
+            <td>{{a.Address}}</td>
+            <td>{{a.AverageGrade}}</td>
+            <td>{{a.Latitude}}</td>
+            <td>{{a.Longitude}}</td>
         <tr>
 </table>

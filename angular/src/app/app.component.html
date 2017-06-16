@@ -1,10 +1,23 @@
-
-<div class="container teal borderYtoX">
+<div>
+<div *ngIf="!isLoggedIn()" class="container teal borderYtoX">
   <a [routerLink]="['/home']">HOME</a>
-  <a [routerLink]="['/place']">PLACES</a>
+  <a [routerLink]="['/accommodation']">ACCOMMODATION</a>
   <a [routerLink]="['/about']">ABOUT</a>
   <a [routerLink]="['/contact']">CONTACT</a>
   <a [routerLink]="['/login']">LOGIN</a>
+</div>
+<div *ngIf="isLoggedIn()" class="container teal borderYtoX">
+  <a [routerLink]="['/home']">HOME</a>
+  <a [routerLink]="['/country']">COUNTRY</a>
+  <a [routerLink]="['/region']">REGION</a>
+  <a [routerLink]="['/place']">PLACE</a>
+  <a [routerLink]="['/accommodation']">ACCOMMODATION</a>
+  <a [routerLink]="['/accommodationtype']">ACCOMMODATION TYPE</a>
+  <a [routerLink]="['/room']">ROOM</a>
+  <a [routerLink]="['/roomreservation']">ROOM RESERVATION</a>
+  <button type="button" (click)="logOut()" 		class="cancelbtn">LOGOUT</button>
+</div>
+  
   <router-outlet></router-outlet>
 </div>
 

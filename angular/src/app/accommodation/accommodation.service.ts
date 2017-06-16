@@ -10,9 +10,9 @@ export class AccommodationService{
 
     }
 
-    getData(): Observable<any> {
+    GetAccommodations(): Observable<any> {
 
-        return this.http.get("http://localhost:54042/api/accommodations").map(this.extractData);        
+        return this.http.get("http://localhost:54042/api/accommodation").map(this.extractData);        
     }
 
     private extractData(res: Response) {

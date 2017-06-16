@@ -70,9 +70,9 @@ namespace BookingApp.Migrations
                 userManager.AddToRole(user1.Id, "AppUser");
             }
 
-            user.Accomodations = new List<Accommodation>();
-            user.Comments = new List<Comment>();
-            user.RoomReservations = new List<RoomReservation>();
+            //user.Accomodations = new List<Accommodation>();
+            //user.Comments = new List<Comment>();
+            //user.RoomReservations = new List<RoomReservation>();
 
             context.SaveChanges();
 
@@ -116,7 +116,7 @@ namespace BookingApp.Migrations
             acc.Place = place;
             acc.Rooms = new List<Room>();
             accType.Accommodations.Add(acc);
-            user.Accomodations.Add(acc);
+            //user.Accomodations.Add(acc);
 
             Room room = new Room();
             room.Accomodation = acc;
@@ -135,7 +135,7 @@ namespace BookingApp.Migrations
             roomRes.User = user;
             roomRes.Room = room;
             roomRes.Id = 1;
-            user.RoomReservations.Add(roomRes);
+            //user.RoomReservations.Add(roomRes);
 
             Comment comm = new Comment();
             comm.Accomodation = acc;
@@ -143,7 +143,7 @@ namespace BookingApp.Migrations
             comm.Text = "Bravissimo.";
             comm.User = user;
             comm.Id = 1;
-            user.Comments.Add(comm);
+            //user.Comments.Add(comm);
 
             try
             {

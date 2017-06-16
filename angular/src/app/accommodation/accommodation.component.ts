@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AccommodationService} from '../services/accommodation.service';
+import {AccommodationService} from '../accommodation/accommodation.service';
 
 @Component({
   selector: 'app-accommodation',
@@ -10,14 +10,14 @@ import {AccommodationService} from '../services/accommodation.service';
 
 export class AccommodationComponent implements OnInit{
 
-    data: AccommodationComponent[];
+    accommon: AccommodationComponent[];
 
    constructor(private _service: AccommodationService) { }
 
     ngOnInit() {
-        this._service.getData().subscribe(
-      (prod: any) => {this.data = prod; console.log(this.data)},//You can set the type to Product.
-      //error => {alert("Unsuccessful fetch operation!"); console.log(error);}
+        this._service.GetAccommodations().subscribe(
+      (prod: any) => {this.accommon = prod; console.log(this.accommon)},//You can set the type to Product.
+      error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
     }
 

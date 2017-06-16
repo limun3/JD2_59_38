@@ -15,12 +15,12 @@ namespace BookingApp.Models
 {
     public class BAIdentityUser : IdentityUser
     {
-        [JsonIgnore]
-        public List<Comment> Comments { get; set; }
-        [JsonIgnore]
-        public List<RoomReservation> RoomReservations { get; set; }
-        [JsonIgnore]
-        public List<Accommodation> Accomodations { get; set; }
+        //[JsonIgnore]
+        //public List<Comment> Comments { get; set; }
+        //[JsonIgnore]
+        //public List<RoomReservation> RoomReservations { get; set; }
+        ////[JsonIgnore]
+        //public List<Accommodation> Accomodations { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<BAIdentityUser> manager, string authenticationType)
         {
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);

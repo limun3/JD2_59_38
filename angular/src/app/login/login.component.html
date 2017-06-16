@@ -1,17 +1,17 @@
-<form action="/action_page.php">
+
+<form #f="ngForm" (ngSubmit)="onSubmit()">
   <div class="container">
     <label><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+    <input type="text" id="Username" placeholder="Enter Username" name="Username" [(ngModel)]="Username">
     <br>
     <label class="pass"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input type="password" placeholder="Enter Password" name="Password" [(ngModel)]="Password">
 <br>
-    <button type="submit">Login</button><br><br>
+    <button type="submit" >Login</button><br><br>
     <input type="checkbox" checked="checked"> Remember me <br><br>
+      <!--<div *ngIf=isLoggedIn()>
+        <button (click)=logOut()>LogOut</button>
+        <span>{{user.Username}}</span>
+      </div>-->
   </div>
-
-  <!--<div class="cancelButton" style="background-color:whitesmoke">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot password?</span>
-  </div>-->
-</form>
+  </form>

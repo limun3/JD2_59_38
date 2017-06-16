@@ -14,12 +14,12 @@ import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 import { AccommodationComponent } from './accommodation/accommodation.component';
 
-import { AccommodationService } from './services/accommodation.service';
+import { AccommodationService } from './accommodation/accommodation.service';
 import { AuthenticationService } from './services/authentication.service';
 import { PlaceService } from './place/place.service';
-// const ChildRoutes = [
-//    {path: "child1", component: SecondComponent},
-//   ]
+import { LoggedInGuard } from './guards/login.guard'
+import { IsAdminGuard } from './guards/admin.guard'
+import { IsManagerGuard } from './guards/manager.guard'
 
 const Routes = [
   {path: "home", component: HomeComponent},
@@ -28,8 +28,6 @@ const Routes = [
   {path: "contact", component: ContactComponent},
   // {path: "Login", component: , canActivate: [LoggedInGuard]},  
   {path: "login",  component: LoginComponent},
-  
-  
   {path: "accommodation",component: AccommodationComponent},
 ]
 
@@ -52,7 +50,7 @@ const Routes = [
     JsonpModule,
     RouterModule.forRoot(Routes)
   ],
-  providers: [AuthenticationService, PlaceService, AccommodationService],
+  providers: [AuthenticationService, PlaceService, AccommodationService, LoggedInGuard, IsAdminGuard, IsManagerGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

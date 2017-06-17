@@ -1,4 +1,4 @@
-<table border="1">
+<!--<table border="1">
         <tr>
             <th>id</th><th>Full Name</th><th>Address</th><th>AverageGrade</th><th>Latitude</th><th>Longitude</th>
         <tr>
@@ -11,3 +11,44 @@
             <td>{{a.Longitude}}</td>
         <tr>
 </table>
+-->
+
+
+
+<section class="tabela">
+  <h1>Accommodation</h1>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0" >
+      <thead>
+        <tr>
+         <th>ID</th><th>Name</th><th>Desc</th><th>Address</th><th>Avg</th><th>Lat</th><th>Lon</th><th>ImageUrl</th><th>Approved</th><th>AType</th><th>Place</th><th>Owner</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <tr *ngFor="let a of accommon;let i = index;">
+            <td>{{a.Id}}</td>
+            <td>{{a.Name}}</td>
+            <td>{{a.Description}}</td>
+            <td>{{a.Address}}</td>
+            <td>{{a.AverageGrade}}</td>
+            <td>{{a.Latitude}}</td>
+            <td>{{a.Longitude}}</td>
+            <td>{{a.ImageUrl}}</td>
+            <td>{{a.Approved}}</td>
+            <td>{{a.AccommodationType}}</td>
+            <td>{{a.Place}}</td>
+            <td>{{a.Owner}}</td>
+        <tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<section class="dugme">
+<button type="submit" >ADD</button>
+</section>

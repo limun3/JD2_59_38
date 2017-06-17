@@ -1,0 +1,41 @@
+<!--<table border="1">
+        <tr>
+            <th>ID</th><th>Name</th><th>Code</th>
+        <tr>
+        <tr *ngFor="let a of country;let i = index;">
+            <td>{{a.Id}}</td>
+            <td>{{a.Name}}</td>
+            <td>{{a.Code}}</td>
+        <tr>
+</table>-->
+
+
+
+<section class="tabela">
+  <h1>Countries</h1>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0" >
+      <thead>
+        <tr>
+         <th>ID</th><th>Name</th><th>Code</th><th>Region</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+          <tr *ngFor="let a of country;let i = index;">
+            <td>{{a.Id}}</td>
+            <td>{{a.Name}}</td>
+            <td>{{a.Code}}</td>
+            <td>{{a.Regions.Name}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="dugme">
+<button type="submit" >ADD</button>
+</section>

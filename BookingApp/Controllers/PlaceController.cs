@@ -31,7 +31,7 @@ namespace BookingApp.Controllers
 
         public IQueryable GetPlaces()
         {
-            return db.Places.Include(u => u.Region);
+            return db.Places;
         }
 
         // POST api/values

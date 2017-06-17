@@ -4,15 +4,15 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class PlaceService{
+export class RegionService{
 
     constructor (private http: Http){
 
     }
 
-    GetPlaces(): Observable<any> {
+    GetRegions(): Observable<any> {
 
-        return this.http.get("http://localhost:54042/api/place").map(this.extractData);        
+        return this.http.get("http://localhost:54042/api/region").map(this.extractData);        
     }
 
     private extractData(res: Response) {

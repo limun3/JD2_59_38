@@ -1,35 +1,24 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Place } from '../place/place.model';
-import { Origins } from '../enumerations/origins.model';
-import { PlaceService } from '../place/place.service';
+import { Component, OnInit } from '@angular/core';
+import {PlaceService} from '../place/place.service';
 
 @Component({
-  selector: 'place',
+  selector: 'app-place',
   templateUrl: './place.component.html',
   styleUrls: ['./place.component.css'],
   providers: [PlaceService]
 })
-export class PlaceComponent implements OnInit {
 
-  @Input() place: Place;
-  @Input() show: boolean = false;
-  Origin : Origins = 'Place';
+export class PlaceComponent implements OnInit{
 
-   places: PlaceComponent[];
+    place: PlaceComponent[];
 
-/*
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
-      activatedRoute.params.subscribe(params => {this.place = params["countryId"]});
-   }
-*/
-constructor(private _service: PlaceService) { }
-  ngOnInit() {
-        this._service.getPlaces().subscribe(
-      (prod: any) => {this.places = prod; console.log(this.places)},//You can set the type to Product.
+   constructor(private _service: PlaceService) { }
+
+    ngOnInit() {
+        this._service.GetPlaces().subscribe(
+      (prod: any) => {this.place = prod; console.log(this.place)},//You can set the type to Product.
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
     }
-  
 
 }

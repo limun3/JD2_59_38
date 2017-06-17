@@ -1,3 +1,33 @@
+<section class="tabela">
+  <h1>Places</h1>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0" >
+      <thead>
+        <tr>
+          <th>ID</th><th>Name</th><th>Region</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+         <tr *ngFor="let a of region;let i = index;">
+            <td>{{a.Id}}</td>
+            <td>{{a.Name}}</td>
+            <td>{{a.Region.Name}}</td>
+        <tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<section class="dugme">
+<button type="submit" >ADD</button>
+</section>
+
+<!--
  <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
 <div class="styled-select slate">
   <select>
@@ -31,17 +61,4 @@
   </select>
 </div>
 <input type="submit">
- </form>
-<!--<a [routerLink]="['/home', place.Id, place.Name, Origin]">{{place.Name}}</a>-->
-
-<table border="1">
-        <tr>
-            <th>id</th><th>Full Name</th><th>Username</th>
-        <tr>
-        <tr *ngFor="let d of data;let i = index;">
-          
-            <td>{{d.Id}}</td>
-            <!--<td>{{d.Name}}</td>-->
-            <!--<td>{{d.Username}}</td>-->
-        <tr>
-</table>
+ </form>-->

@@ -1,0 +1,44 @@
+<!--<table border="1">
+        <tr>
+            <th>ID</th><th>RoomNumber</th><th>BedCount</th><th>Description</th><th>PricePerNight</th>
+        <tr>
+        <tr *ngFor="let a of room;let i = index;">
+            <td>{{a.Id}}</td>
+            <td>{{a.RoomNumber}}</td>
+            <td>{{a.BedCount}}</td>
+            <td>{{a.Description}}</td>
+            <td>{{a.PricePerNight}}</td>
+        <tr>
+</table>-->
+
+<section class="tabela">
+  <h1>Rooms</h1>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0" >
+      <thead>
+        <tr>
+         <th>ID</th><th>RoomNumber</th><th>BedCount</th><th>Description</th><th>PricePerNight</th>
+         <th>Accommodation</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+         <tr *ngFor="let a of room;let i = index;">
+            <td>{{a.Id}}</td>
+            <td>{{a.RoomNumber}}</td>
+            <td>{{a.BedCount}}</td>
+            <td>{{a.Description}}</td>
+            <td>{{a.PricePerNight}}</td>
+            <td>{{a.Accommodation.Name}}</td>
+        <tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="dugme">
+<button type="submit" >ADD</button>
+</section>

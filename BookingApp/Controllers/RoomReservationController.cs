@@ -36,7 +36,7 @@ namespace BookingApp.Controllers
 
         public IQueryable GetRooms()
         {
-            return db.RoomReservations.Include(u => u.Room).Include(u => u.User);
+            return db.RoomReservations;
         }
 
 

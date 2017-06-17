@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlaceComponent } from './place.component';
+// import { PlaceComponent } from './place.component';
 
-describe('PlaceComponent', () => {
-  let component: PlaceComponent;
-  let fixture: ComponentFixture<PlaceComponent>;
+// describe('PlaceComponent', () => {
+//   let component: PlaceComponent;
+//   let fixture: ComponentFixture<PlaceComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ PlaceComponent ]
-    })
-    .compileComponents();
-  }));
+//   beforeEach(async(() => {
+//     TestBed.configureTestingModule({
+//       declarations: [ PlaceComponent ]
+//     })
+//     .compileComponents();
+//   }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PlaceComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+//   beforeEach(() => {
+//     fixture = TestBed.createComponent(PlaceComponent);
+//     component = fixture.componentInstance;
+//     fixture.detectChanges();
+//   });
 
-  it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
-});
+//   it('should be created', () => {
+//     expect(component).toBeTruthy();
+//   });
+// });

@@ -1,4 +1,4 @@
-import { AccommodationType } from './accommodation-type.model';
+import { AccommodationType } from '../accommodation-type/accommodationtype.model';
 import { BAIdentityUser } from './baidentity-user.model';
 import { Place } from './place.model';
 

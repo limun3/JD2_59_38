@@ -1,4 +1,5 @@
 import { Response } from '@angular/http'
+import { Observable } from 'rxjs/Observable';
 import { AuthenticationData } from './authentication-data.model';
 import { Injectable } from '@angular/core';
 
@@ -57,6 +58,11 @@ export class AuthenticationService {
     getUserId(): number {
         let token=localStorage.getItem("token");
         return JSON.parse(token).userId;
+    }
+
+
+    isAdmin(): boolean {
+        return this.getRole()=="Admin";
     }
 
 }

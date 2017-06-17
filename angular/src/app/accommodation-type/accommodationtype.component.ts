@@ -20,9 +20,4 @@ export class AccommodationTypeComponent implements OnInit{
       error => {alert("Unsuccessful fetch operation!"); console.log(error);}
     );
 }
-
-// Add(element: addatype) {
-//         this.elements.push(element);
-//     }
-
 }

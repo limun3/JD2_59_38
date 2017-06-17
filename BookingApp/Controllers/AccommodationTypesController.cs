@@ -71,17 +71,21 @@ namespace BookingApp.Controllers
         }
 
         // POST: api/AccommodationTypes
+        [HttpPost]
         [ResponseType(typeof(AccommodationType))]
         public IHttpActionResult PostAccommodationType(AccommodationType accommodationType)
         {
+            AccommodationType acctype = new AccommodationType();
+            acctype.Id = accommodationType.Id;
+            acctype.Name = accommodationType.Name;
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.AccommodationTypes.Add(accommodationType);
+            db.AccommodationTypes.Add(acctype);
             db.SaveChanges();
-
+            //new { Controller = "AccommodationType", id = accommodationType.Id }, accommodationType
             return CreatedAtRoute("DefaultApi", new { id = accommodationType.Id }, accommodationType);
         }
 

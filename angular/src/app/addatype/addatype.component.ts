@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-// import {AddATypeService} from '../addatype/addatype.service';
+import { NgForm } from "@angular/forms";
+import { Router, ActivatedRoute } from "@angular/router";
+import { AccommodationTypeService } from '../accommodation-type/accommodationtype.service';
+import { AccommodationType } from '../accommodation-type/accommodationtype.model';
 
 @Component({
   selector: 'app-addatype',
@@ -10,23 +12,16 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AddATypeComponent implements OnInit{
-
+    Id: number;
     accommodationtype: AddATypeComponent[];
 
-//    constructor(private _service: AddATypeService) { }
-constructor(){}
+constructor(private service: AccommodationTypeService) { }
 
-    ngOnInit() {
-    //     this._service.GetAccommodationTypes().subscribe(
-    //   (prod: any) => {this.accommodationtype = prod; console.log(this.accommodationtype)},//You can set the type to Product.
-    //   error => {alert("Unsuccessful fetch operation!"); console.log(error);}
-    //);
-}
+ngOnInit() {}
 
-
-    //this.Username = "";
-    //this.Password = "";
-  
-
+onSubmit(accommodationtype: AccommodationType, form: NgForm) {
+    console.log(accommodationtype);
+    this.service.create(accommodationtype);
+  }
 
 }

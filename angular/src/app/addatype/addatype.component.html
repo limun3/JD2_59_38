@@ -1,26 +1,17 @@
 <div class="container">
-	<form>
+	<form class="dugme" #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
 	<div>
-   
-    <label>
-      ID<br>
-    <input name="id1" type="text">
-    </label>
-  
-    <label>
-      Name<br>
-    <input name="name1" type="text" name="Name" [(ngModel)]="model.Name" #Name="ngModel" required>
-    </label>
-	</div>
+      <label for="Id">Id</label>
+      <input type="text" name="Id" ngModel>
+    </div>
+    <div>
+      <label for="Name">Name</label>
+      <input type="text" name="Name" ngModel>
+    </div> 
+      <input type="submit">
 </form>
-
-<form class="dugme" #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" >
-    <input type="submit">
 <!--<input type="submit" [routerLink]="['/accommodationtype']">SUBMIT</input>-->
 <!--<button type="submit" [routerLink]="['/accommodationtype']">CANCEL</button>-->
-</form>
-
-
 </div>
 
 

@@ -21,7 +21,8 @@ ngOnInit() {}
 
 onSubmit(accommodationtype: AccommodationType, form: NgForm) {
     console.log(accommodationtype);
-    this.service.create(accommodationtype);
+    this.service.postAccomType(accommodationtype);
+    form.reset();
   }
 
 }

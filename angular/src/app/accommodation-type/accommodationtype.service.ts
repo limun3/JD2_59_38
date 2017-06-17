@@ -22,9 +22,14 @@ export class AccommodationTypeService{
         return body || [];
     }
 
-     create(acctype: AccommodationType): Promise<AccommodationType> {
+     postAccomType(acctype: AccommodationType): Promise<AccommodationType> {
     return this.http
-      .post("http://localhost:54042/api/accommodationtypes", JSON.stringify(acctype), {headers: this.headers})
+      .post("http://localhost:54042/api/accommodationtypes", JSON.stringify(
+          {
+              Id: acctype.Id,
+              Name: acctype.Name
+          }
+      ), {headers: this.headers})
       .toPromise()
       .then(res => res.json().acctype as AccommodationType);
   }

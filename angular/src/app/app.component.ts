@@ -17,4 +17,12 @@ export class AppComponent {
 logOut(){
     this.authService.logOut();
   }
+  
+  isManager() : boolean{
+    return this.authService.getRole() == "Manager";
+  }
+
+  isAdmin(): boolean {
+    return this.authService.getRole() == "Admin";
+  }
 }

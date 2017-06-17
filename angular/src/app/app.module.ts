@@ -19,6 +19,10 @@ import { RoomReservationComponent } from './room-reservation/roomreservation.com
 import { AccommodationTypeComponent } from './accommodation-type/accommodationtype.component';
 
 import { AddATypeComponent } from './addatype/addatype.component';
+import { AddCountry } from './addcountry/addcountry.component';
+import { AddRegion } from './addregion/addregion.component';
+import { AddPlace } from './addplace/addplace.component';
+import { AddAccommodation } from './addaccommodation/addaccommodation.component';
 
 import { AccommodationService } from './accommodation/accommodation.service';
 import { AuthenticationService } from './services/authentication.service';
@@ -46,6 +50,10 @@ const Routes = [
   {path: "accommodationtype", component: AccommodationTypeComponent},
 
   {path: "addatype", component: AddATypeComponent},
+  {path: "addcountry", component: AddCountry},
+  {path: "addregion", component: AddRegion},
+  {path: "addplace", component: AddPlace},
+  {path: "addaccommodation", component: AddAccommodation},
 ]
 
 @NgModule({
@@ -63,6 +71,10 @@ const Routes = [
     RoomReservationComponent,
     AccommodationTypeComponent,
     AddATypeComponent,
+    AddCountry,
+    AddRegion,
+    AddPlace,
+    AddAccommodation,
   ],
   imports: [
     BrowserModule,

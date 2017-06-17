@@ -1,0 +1,64 @@
+<div class="container">
+  <form>
+    <div>
+    
+      <label>
+        ID<br>
+        <input name="id1" type="text">
+      </label>
+    
+      <label>
+        Name<br>
+        <input name="name1" type="text" name="Name" [(ngModel)]="model.Name" #Name="ngModel" required>
+      </label>
+       <label>
+        Description<br>
+        <input name="name1" type="text" name="Name" [(ngModel)]="model.Name" #Name="ngModel" required>
+      </label>
+       <label>
+        Address<br>
+        <input name="name1" type="text" name="Name" [(ngModel)]="model.Name" #Name="ngModel" required>
+      </label>
+       <label>
+        AverageGrade<br>
+        <input name="name1" type="text" name="Name" [(ngModel)]="model.Name" #Name="ngModel" required>
+      </label>
+       <label>
+        Latitude<br>
+        <input name="name1" type="text" name="Name" [(ngModel)]="model.Name" #Name="ngModel" required>
+      </label>
+       <label>
+        Longitude<br>
+        <input name="name1" type="text" name="Name" [(ngModel)]="model.Name" #Name="ngModel" required>
+      </label>
+       <label>
+        ImgUrl<br>
+        <input name="name1" type="text" name="Name" [(ngModel)]="model.Name" #Name="ngModel" required>
+      </label>
+       <label>
+        Approved<br>
+        <input name="name1" type="text" name="Name" [(ngModel)]="model.Name" #Name="ngModel" required>
+      </label>
+       <label>
+        AccommodationType<br>
+        <input name="name1" type="text" name="Name" [(ngModel)]="model.Name" #Name="ngModel" required>
+      </label>
+       <label>
+        Place<br>
+        <input name="name1" type="text" name="Name" [(ngModel)]="model.Name" #Name="ngModel" required>
+      </label>
+      <label>
+        Owner<br>
+        <input name="name1" type="text" name="Name" [(ngModel)]="model.Name" #Name="ngModel" required>
+      </label>
+    </div>
+  </form>
+
+  <form class="dugme" #f="ngForm" (ngSubmit)="onSubmit(f.value, f)" >
+    <input type="submit">
+    <!--<input type="submit" [routerLink]="['/accommodationtype']">SUBMIT</input>-->
+    <!--<button type="submit" [routerLink]="['/accommodationtype']">CANCEL</button>-->
+  </form>
+</div>
+
+

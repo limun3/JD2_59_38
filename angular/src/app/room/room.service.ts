@@ -21,6 +21,16 @@ export class RoomService{
         return body || [];
     }
 
+    remove(id: number): Promise<void> {
+      const uri =  "http://localhost:54042/api/room";
+    const url = `${uri}/${id}`;
+    alert("room.service" + id);
+    return this.http.delete(url, {headers: this.headers})
+      .toPromise()
+      .then(() => null);
+  }
+
+
 postRoom(room: Room): Promise<Room> {
     alert ("Price: " + room.pricePerNight);
     return this.http

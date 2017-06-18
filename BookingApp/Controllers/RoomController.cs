@@ -111,7 +111,7 @@ namespace BookingApp.Controllers
         // DELETE api/values/5
         [HttpDelete]
         [ResponseType(typeof(void))]
-        [Authorize(Roles = "Manager")]
+       // [Authorize(Roles = "Manager")]
         public IHttpActionResult DeleteRoom(int id)
         {
             Room room = db.Rooms.Find(id);

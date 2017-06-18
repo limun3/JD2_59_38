@@ -111,7 +111,7 @@ namespace BookingApp.Controllers
 
         [HttpDelete]
         [ResponseType(typeof(void))]
-        [Authorize(Roles = "Manager")]
+        //[Authorize(Roles = "Manager")]
         public IHttpActionResult DeleteAccommodation(int id)
         {
             Accommodation accommodation = db.Accommodations.Find(id);

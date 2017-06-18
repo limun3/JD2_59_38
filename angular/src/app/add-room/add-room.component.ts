@@ -23,5 +23,9 @@ onSubmit(room: Room, form: NgForm) {
     this.service.postRoom(room);
     form.reset();
   }
-
+deleteRoom(id: number): void
+  {
+    this.service.remove(id);
+    alert(id);
+  }
 }

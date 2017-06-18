@@ -33,4 +33,13 @@ export class CountryService{
       .toPromise()
       .then(res => res.json().country as Country);
   }
+
+  remove(id: number): Promise<void> {
+      const uri =  "http://localhost:54042/api/country";
+    const url = `${uri}/${id}`;
+    return this.http.delete(url, {headers: this.headers})
+      .toPromise()
+      .then(() => null);
+  }
+
 }

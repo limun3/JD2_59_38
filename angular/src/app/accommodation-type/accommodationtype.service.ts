@@ -34,4 +34,13 @@ export class AccommodationTypeService{
       .toPromise()
       .then(res => res.json().acctype as AccommodationType);
   }
+
+  remove(id: number): Promise<void> {
+      const uri =  "http://localhost:54042/api/accommodationtypes";
+    const url = `${uri}/${id}`;
+    return this.http.delete(url, {headers: this.headers})
+      .toPromise()
+      .then(() => null);
+  }
+
 }

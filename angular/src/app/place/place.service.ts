@@ -35,5 +35,12 @@ export class PlaceService{
       .toPromise()
       .then(res => res.json().place as Place);
   }
+remove(id: number): Promise<void> {
+      const uri =  "http://localhost:54042/api/place";
+    const url = `${uri}/${id}`;
+    return this.http.delete(url, {headers: this.headers})
+      .toPromise()
+      .then(() => null);
+  }
 
 }

@@ -25,4 +25,11 @@ onSubmit(region: Region, form: NgForm) {
     form.reset();
   }
 
+  deleteRegion(id: number): void
+  {
+    this.service.remove(id);
+    alert(id);
+  }
+
+
 }

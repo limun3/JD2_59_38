@@ -23,6 +23,14 @@ export class AccommodationService{
         return body || [];
     }
 
+    remove(id: number): Promise<void> {
+      const uri =  "http://localhost:54042/api/accommodation";
+    const url = `${uri}/${id}`;
+    return this.http.delete(url, {headers: this.headers})
+      .toPromise()
+      .then(() => null);
+  }
+
 postAccommodation(accommodation: Accommodation): Promise<Accommodation> {
         return this.http
             .post('http://localhost:54042/api/accommodation', 

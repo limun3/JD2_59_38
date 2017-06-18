@@ -24,4 +24,10 @@ onSubmit(country: Country, form: NgForm) {
     form.reset();
   }
 
+  deleteCountry(id: number): void
+  {
+    this.service.remove(id);
+    alert(id);
+  }
+
 }

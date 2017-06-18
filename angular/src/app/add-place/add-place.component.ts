@@ -23,5 +23,9 @@ onSubmit(place: Place, form: NgForm) {
     this.service.postPlace(place);
     form.reset();
   }
-
+deletePlace(id: number): void
+  {
+    this.service.remove(id);
+    alert(id);
+  }
 }

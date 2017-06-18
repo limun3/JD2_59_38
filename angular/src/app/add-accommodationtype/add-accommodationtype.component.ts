@@ -24,4 +24,10 @@ onSubmit(accommodationtype: AccommodationType, form: NgForm) {
     this.service.postAccomType(accommodationtype);
     form.reset();
   }
+
+  deleteAccomType(id: number): void
+  {
+    this.service.remove(id);
+    alert(id);
+  }
 }

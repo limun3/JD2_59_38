@@ -42,4 +42,13 @@ export class RegionService{
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }
+
+    remove(id: number): Promise<void> {
+      const uri =  "http://localhost:54042/api/region";
+    const url = `${uri}/${id}`;
+    return this.http.delete(url, {headers: this.headers})
+      .toPromise()
+      .then(() => null);
+  }
+
 }

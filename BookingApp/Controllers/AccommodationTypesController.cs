@@ -17,6 +17,8 @@ namespace BookingApp.Controllers
         private BAContext db = new BAContext();
 
         // GET: api/AccommodationTypes
+        [HttpGet]
+        [ResponseType(typeof(AccommodationType))]
         public IQueryable<AccommodationType> GetAccommodationTypes()
         {
             return db.AccommodationTypes;
@@ -36,6 +38,7 @@ namespace BookingApp.Controllers
         }
 
         // PUT: api/AccommodationTypes/5
+        [HttpPut]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutAccommodationType(int id, AccommodationType accommodationType)
         {
@@ -90,6 +93,7 @@ namespace BookingApp.Controllers
         }
 
         // DELETE: api/AccommodationTypes/5
+        [HttpDelete]
         [ResponseType(typeof(AccommodationType))]
         public IHttpActionResult DeleteAccommodationType(int id)
         {

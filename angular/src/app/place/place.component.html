@@ -12,10 +12,10 @@
   <div class="tbl-content">
     <table cellpadding="0" cellspacing="0" border="0">
       <tbody>
-         <tr *ngFor="let a of region;let i = index;">
+         <tr *ngFor="let a of place;let i = index;">
             <td>{{a.Id}}</td>
             <td>{{a.Name}}</td>
-            <td>{{a.Region.Name}}</td>
+            <td>{{a.Region}}</td>
         <tr>
       </tbody>
     </table>
@@ -24,7 +24,7 @@
 
 
 <section class="dugme">
-<button type="submit" >ADD</button>
+<button type="submit" [routerLink]="['/add-place']">ADD NEW</button>
 </section>
 
 <!--

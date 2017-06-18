@@ -1,0 +1,43 @@
+<div class="container">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
+    <div>
+      <label for="Name">Name</label>
+      <input type="text" name="name" ngModel>
+    </div>
+    <div>
+      <label for="Description">Description</label>
+      <input type="text" name="description" ngModel>
+    </div> 
+     <div>
+      <label for="Address">Address</label>
+      <input type="text" name="address" ngModel>
+    </div> 
+     <div>
+      <label for="Latitude">Latitude</label>
+      <input type="text" name="latitude" ngModel>
+    </div> 
+     <div>
+      <label for="Longitude">Longitude</label>
+      <input type="text" name="longitude" ngModel>
+    </div> 
+    <div>
+      <label for="ImageURL">ImageURL</label>
+      <input type="text" name="imageURL" ngModel>
+    </div> 
+    <div>
+     <label for="AccommodationType">AccommodationType</label>
+     <select class="form-control" name="accommodationType" ngModel>
+        <option *ngFor="let at of accommodationTypes" value="{{at.Id}}">{{at.Name}}</option>
+     </select>
+    </div>
+    <div>
+     <label for="Place">Place</label>
+     <select class="form-control" name="place" ngModel>
+        <option *ngFor="let p of places" value="{{p.Id}}">{{p.Name}}</option>
+     </select>
+    </div>
+     <input type="submit" >
+  </form>
+</div>
+
+

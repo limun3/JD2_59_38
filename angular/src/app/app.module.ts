@@ -18,11 +18,12 @@ import { RoomComponent } from './room/room.component';
 import { RoomReservationComponent } from './room-reservation/roomreservation.component';
 import { AccommodationTypeComponent } from './accommodation-type/accommodationtype.component';
 
-import { AddATypeComponent } from './addatype/addatype.component';
-import { AddCountry } from './addcountry/addcountry.component';
-import { AddRegion } from './addregion/addregion.component';
-import { AddPlace } from './addplace/addplace.component';
-import { AddAccommodation } from './addaccommodation/addaccommodation.component';
+import { AddATypeComponent } from './add-accommodationtype/add-accommodationtype.component';
+import { AddCountry } from './add-country/add-country.component';
+import { AddRegionComponent } from './add-region/add-region.component';
+import { AddPlaceComponent } from './add-place/add-place.component';
+import { AddAccommodation } from './add-accommodation/add-accommodation.component';
+import { AddRoomComponent} from './add-room/add-room.component'
 
 import { AccommodationService } from './accommodation/accommodation.service';
 import { AuthenticationService } from './services/authentication.service';
@@ -49,11 +50,12 @@ const Routes = [
   {path: "roomreservation", component: RoomReservationComponent},
   {path: "accommodationtype", component: AccommodationTypeComponent},
 
-  {path: "addatype", component: AddATypeComponent},
-  {path: "addcountry", component: AddCountry},
-  {path: "addregion", component: AddRegion},
-  {path: "addplace", component: AddPlace},
-  {path: "addaccommodation", component: AddAccommodation},
+  {path: "add-accommodationtype", component: AddATypeComponent},
+  {path: "add-country", component: AddCountry},
+  {path: "add-region", component: AddRegionComponent},
+  {path: "add-place", component: AddPlaceComponent},
+  {path: "add-accommodation", component: AddAccommodation},
+  {path: "add-room", component: AddRoomComponent}
 ]
 
 @NgModule({
@@ -72,8 +74,9 @@ const Routes = [
     AccommodationTypeComponent,
     AddATypeComponent,
     AddCountry,
-    AddRegion,
-    AddPlace,
+    AddRegionComponent,
+    AddPlaceComponent,
+    AddRoomComponent,
     AddAccommodation,
   ],
   imports: [

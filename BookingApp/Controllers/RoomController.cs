@@ -15,6 +15,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
+        [HttpGet]
         [ResponseType(typeof(Room))]
         public IHttpActionResult GetRoom(int id)
         {
@@ -29,14 +30,16 @@ namespace BookingApp.Controllers
             }
         }
         [HttpGet]
+        [ResponseType(typeof(Room))]
         public IQueryable GetRooms()
         {
             return db.Rooms.Include(u => u.Accomodation);
         }
 
         // POST api/values
+        [HttpPost]
         [ResponseType(typeof(void))]
-        [Authorize(Roles ="Manager")]
+        //[Authorize(Roles ="Manager")]
         public IHttpActionResult PostRoom(Room room)
         {
             if(!ModelState.IsValid)
@@ -64,6 +67,7 @@ namespace BookingApp.Controllers
         }
 
         // PUT api/values/5
+        [HttpPut]
         [ResponseType(typeof(void))]
         [Authorize(Roles = "Manager")]
         public IHttpActionResult PutRoom(int id, Room room)
@@ -105,6 +109,7 @@ namespace BookingApp.Controllers
         }
 
         // DELETE api/values/5
+        [HttpDelete]
         [ResponseType(typeof(void))]
         [Authorize(Roles = "Manager")]
         public IHttpActionResult DeleteRoom(int id)

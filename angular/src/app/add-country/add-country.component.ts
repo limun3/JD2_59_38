@@ -5,9 +5,9 @@ import { CountryService } from '../country/country.service';
 import { Country } from '../models/country.model';
 
 @Component({
-  selector: 'app-addcountry',
-  templateUrl: './addcountry.component.html',
-  styleUrls: ['./addcountry.component.css'],
+  selector: 'add-country',
+  templateUrl: './add-country.component.html',
+  styleUrls: ['./add-country.component.css'],
 })
 
 export class AddCountry implements OnInit{
@@ -18,9 +18,10 @@ constructor(private service: CountryService) { }
 
 ngOnInit() {}
 
-// onSubmit(country: Country, form: NgForm) {
-//     console.log(country);
-//     this.service.create(country);
-//   }
+onSubmit(country: Country, form: NgForm) {
+    console.log(country);
+    this.service.postCountry(country);
+    form.reset();
+  }
 
 }

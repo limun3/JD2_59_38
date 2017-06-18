@@ -5,9 +5,9 @@ import { AccommodationService } from '../accommodation/accommodation.service';
 import { Accommodation } from '../models/accommodation.model';
 
 @Component({
-  selector: 'app-addaccommodation',
-  templateUrl: './addaccommodation.component.html',
-  styleUrls: ['./addaccommodation.component.css'],
+  selector: 'add-accommodation',
+  templateUrl: './add-accommodation.component.html',
+  styleUrls: ['./add-accommodation.component.css'],
 })
 
 export class AddAccommodation implements OnInit{
@@ -18,9 +18,9 @@ constructor(private service: AccommodationService) { }
 
 ngOnInit() {}
 
-// onSubmit(country: Country, form: NgForm) {
-//     console.log(country);
-//     this.service.create(country);
-//   }
-
+onSubmit(accommodation: Accommodation, form: NgForm) {
+    console.log(accommodation);
+    this.service.postAccommodation(accommodation);
+    form.reset();
+  }
 }

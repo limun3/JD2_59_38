@@ -16,6 +16,7 @@ namespace BookingApp.Controllers
 
         private BAContext db = new BAContext();
 
+        [HttpGet]
         [ResponseType(typeof(Comment))]
         public IHttpActionResult GetComment(int id)
         {
@@ -32,12 +33,14 @@ namespace BookingApp.Controllers
             }
         }
 
+        [HttpGet]
+        [ResponseType(typeof(Comment))]
         public IQueryable GetComments()
         {
             return db.Comments.Include(u => u.Accomodation).Include(u => u.User);
         }
 
-
+        [HttpPost]
         [ResponseType(typeof(void))]
         [Authorize(Roles = "AppUser")]
         public IHttpActionResult PostComment(Comment comm)
@@ -66,9 +69,9 @@ namespace BookingApp.Controllers
 
         }
 
+        [HttpPut]
         [ResponseType(typeof(void))]
         [Authorize(Roles = "AppUser")]
-
         public IHttpActionResult PutComment(int id, Comment comm)
         {
             if (!ModelState.IsValid)
@@ -107,8 +110,9 @@ namespace BookingApp.Controllers
             return db.Comments.Count(e => e.Id == id) > 0;
         }
 
+        [HttpDelete]
         [ResponseType(typeof(void))]
-        [Authorize(Roles = "AppUser")]
+        //[Authorize(Roles = "AppUser")]
         public IHttpActionResult DeleteComment(int id)
         {
             Comment comm = db.Comments.Find(id);

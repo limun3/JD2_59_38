@@ -15,6 +15,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
+        [HttpGet]
         [ResponseType(typeof(RoomReservation))]
         public IHttpActionResult GetRoomReservation(int id)
         {
@@ -34,13 +35,15 @@ namespace BookingApp.Controllers
             return Ok(roomReservation);
         }
 
+        [HttpGet]
+        [ResponseType(typeof(RoomReservation))]
         public IQueryable GetRooms()
         {
             return db.RoomReservations;
         }
 
 
-
+        [HttpPost]
         [ResponseType(typeof(void))]
         [Authorize(Roles = "AppUser")]
         public IHttpActionResult PostRoomReservation(RoomReservation roomReservation)
@@ -73,6 +76,7 @@ namespace BookingApp.Controllers
             return db.RoomReservations.Count(e => e.Id == id) > 0;
         }
 
+        [HttpPut]
         [ResponseType(typeof(void))]
         [Authorize(Roles = "AppUser")]
         public IHttpActionResult PutRoomReservation(int id, RoomReservation roomReservation)
@@ -106,6 +110,7 @@ namespace BookingApp.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        [HttpDelete]
         [ResponseType(typeof(void))]
         [Authorize(Roles = "AppUser")]
         public IHttpActionResult DeleteRoomReservation(int id)

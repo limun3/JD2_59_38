@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core"
 import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { Country } from '../models/country.model'
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CountryService{
-
+    private headers = new Headers({'Content-Type': 'application/json'});
     constructor (private http: Http){
 
     }
@@ -19,4 +20,17 @@ export class CountryService{
         let body = res.json();
         return body || [];
     }
+    
+    postCountry(country: Country): Promise<Country> {
+    return this.http
+      .post("http://localhost:54042/api/country", JSON.stringify(
+          {
+              id: country.id,
+              name: country.name,
+              code: country.code
+          }
+      ), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().country as Country);
+  }
 }

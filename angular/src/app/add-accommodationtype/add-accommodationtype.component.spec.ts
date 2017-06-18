@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddATypeComponent } from './addatype.component';
+import { AddATypeComponent } from './add-accommodationtype.component';
 
 describe('AccomodationTypeAddComponent', () => {
   let component: AddATypeComponent;

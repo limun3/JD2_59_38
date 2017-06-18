@@ -32,7 +32,7 @@
             <td>{{a.BedCount}}</td>
             <td>{{a.Description}}</td>
             <td>{{a.PricePerNight}}</td>
-            <td>{{a.Accommodation.Name}}</td>
+            <td>{{a.Accommodation}}</td>
         <tr>
       </tbody>
     </table>
@@ -40,5 +40,5 @@
 </section>
 
 <section class="dugme">
-<button type="submit" >ADD</button>
+<button type="submit" [routerLink]="['/add-room']">ADD NEW</button>
 </section>

@@ -15,6 +15,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
+        [HttpGet]
         [ResponseType(typeof(Accommodation))]
         public IHttpActionResult GetAccomodation(int id)
         {
@@ -41,9 +42,9 @@ namespace BookingApp.Controllers
             //    Include(u => u.Place).
             //    Include(u => u.Owner);
         }
-
+        [HttpPost]
         [ResponseType(typeof(void))]
-        [Authorize(Roles ="Manager")]
+        //[Authorize(Roles ="Manager")]
         public IHttpActionResult PostAccommodation(Accommodation accommodation)
         {
             if (!ModelState.IsValid)
@@ -67,7 +68,7 @@ namespace BookingApp.Controllers
                 return BadRequest();
             }
         }
-
+        [HttpPut]
         [ResponseType(typeof(void))]
         [Authorize(Roles = "Admin")]
         public IHttpActionResult PutAccommodation(int id, Accommodation accommodation)
@@ -108,6 +109,7 @@ namespace BookingApp.Controllers
             return db.Accommodations.Count(e => e.Id == id) > 0;
         }
 
+        [HttpDelete]
         [ResponseType(typeof(void))]
         [Authorize(Roles = "Manager")]
         public IHttpActionResult DeleteAccommodation(int id)

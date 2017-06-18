@@ -15,6 +15,7 @@ namespace BookingApp.Controllers
     {
         private BAContext db = new BAContext();
 
+        [HttpGet]
         [ResponseType(typeof(Place))]
         public IHttpActionResult GetPlace(int id)
         {
@@ -28,13 +29,15 @@ namespace BookingApp.Controllers
                 return Ok(place);
             }
         }
-
+        [HttpGet]
+        [ResponseType(typeof(void))]
         public IQueryable GetPlaces()
         {
             return db.Places;
         }
 
         // POST api/values
+        [HttpPost]
         [ResponseType(typeof(void))]
         public IHttpActionResult PostPlace(Place place)
         {
@@ -62,6 +65,7 @@ namespace BookingApp.Controllers
 
         }
 
+        [HttpPut]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutPlace(int id, Place place)
         {
@@ -100,6 +104,8 @@ namespace BookingApp.Controllers
         {
             return db.Places.Count(e => e.Id == id) > 0;
         }
+
+        [HttpDelete]
         [ResponseType(typeof(void))]
         public IHttpActionResult DeletePlace(int id)
         {

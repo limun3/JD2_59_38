@@ -29,7 +29,7 @@
             <td>{{a.Id}}</td>
             <td>{{a.Name}}</td>
             <td>{{a.Code}}</td>
-            <td>{{a.Regions.Name}}</td>
+            <td>{{a.Regions}}</td>
         </tr>
       </tbody>
     </table>
@@ -37,5 +37,5 @@
 </section>
 
 <section class="dugme">
-<button type="submit" >ADD</button>
+<button type="submit" [routerLink]="['/add-country']">ADD NEW</button>
 </section>

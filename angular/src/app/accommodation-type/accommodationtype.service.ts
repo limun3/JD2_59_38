@@ -23,7 +23,8 @@ export class AccommodationTypeService{
     }
 
      postAccomType(acctype: AccommodationType): Promise<AccommodationType> {
-    return this.http
+         debugger
+    return this.http 
       .post("http://localhost:54042/api/accommodationtypes", JSON.stringify(
           {
               Id: acctype.Id,

@@ -5,9 +5,9 @@ import { AccommodationTypeService } from '../accommodation-type/accommodationtyp
 import { AccommodationType } from '../accommodation-type/accommodationtype.model';
 
 @Component({
-  selector: 'app-addatype',
-  templateUrl: './addatype.component.html',
-  styleUrls: ['./addatype.component.css'],
+  selector: 'add-accommodationtype',
+  templateUrl: './add-accommodationtype.component.html',
+  styleUrls: ['./add-accommodationtype.component.css'],
 //   providers: [AddATypeService]
 })
 
@@ -24,5 +24,4 @@ onSubmit(accommodationtype: AccommodationType, form: NgForm) {
     this.service.postAccomType(accommodationtype);
     form.reset();
   }
-
 }

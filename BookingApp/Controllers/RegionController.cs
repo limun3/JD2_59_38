@@ -17,16 +17,19 @@ namespace BookingApp.Controllers
         private BAContext db = new BAContext();
 
         // GET: api/Region
+        [HttpGet]
+        [ResponseType(typeof(Region))]
         public IQueryable<Region> GetRegions()
         {
-            return db.Regions.Include(u => u.Country);
+            return db.Regions;
         }
 
         // GET: api/Region/5
+        [HttpGet]
         [ResponseType(typeof(Region))]
         public IHttpActionResult GetRegion(int id)
         {
-            Region region = db.Regions.Include(u => u.Country).SingleOrDefault(u => u.Id == id);
+            Region region = db.Regions.Find(id);
             if (region == null)
             {
                 return NotFound();
@@ -36,6 +39,7 @@ namespace BookingApp.Controllers
         }
 
         // PUT: api/Region/5
+        [HttpPut]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutRegion(int id, Region region)
         {
@@ -71,21 +75,28 @@ namespace BookingApp.Controllers
         }
 
         // POST: api/Region
+        [HttpPost]
         [ResponseType(typeof(Region))]
         public IHttpActionResult PostRegion(Region region)
         {
+            Region reg = new Region();
+            reg.Id = region.Id;
+            reg.Name = region.Name;
+            reg.Country = region.Country;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Regions.Add(region);
+            db.Regions.Add(reg);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = region.Id }, region);
         }
 
         // DELETE: api/Region/5
+        [HttpDelete]
         [ResponseType(typeof(Region))]
         public IHttpActionResult DeleteRegion(int id)
         {

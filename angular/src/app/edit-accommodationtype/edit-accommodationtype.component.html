@@ -1,0 +1,21 @@
+<div  class="container">
+    <p>EDIT ACCOMMODATION-TYPE</p>
+	<form class="dugme" #f="ngForm" (ngSubmit)="updateAcType(f.value, f)">
+    <div>
+      <label>Accommodation Types: </label>
+     <select  class="form-control" name="AccommodationType" >
+        <option *ngFor="let at of accommodationtype" ng-value="at.id" >{{at.Id}}-{{at.Name}}</option>
+        </select>
+    </div>
+    <div>
+        <label for="Id">Id</label>
+        <input type="text" name= "Id" ngModel />
+    </div>
+    <div>
+      <label for="Name">Name</label>
+      <input type="text" name="Name" ngModel>
+    </div> 
+      <input type="submit">
+      <button type="submit" [routerLink]="['/accommodationtype']">CANCEL</button>
+  </form>
+</div>

@@ -1,0 +1,36 @@
+<div class="container">
+<p>EDIT ROOM</p>
+	<form class="dugme" #f="ngForm" (ngSubmit)="updateRoom(f.value, f)">
+	<div>
+      <label>Rooms: </label>
+     <select  class="form-control" name="Room" >
+        <option *ngFor="let room of rooms" ng-value="pl.id" >ID: {{room.Id}}, RoomNumber: {{room.RoomNumber}},
+             BedCount: {{room.BedCount}}, Description: {{room.Description}}, 
+             PricePerNight: {{room.PricePerNight}}
+        </option>
+        </select>
+  </div>
+	<div>
+      <label for="id">Id</label>
+      <input type="text" name="id" ngModel>
+    </div>
+    <div>
+      <label for="roomNumber">RoomNumber</label>
+      <input type="text" name="roomNumber" ngModel>
+    </div> 
+    <div>
+      <label for="bedCount">BedCount</label>
+      <input type="text" name="bedCount" ngModel>
+    </div> 
+        <div>
+      <label for="description">Description</label>
+      <input type="text" name="description" ngModel>
+    </div> 
+        <div>
+      <label for="pricePerNight">PricePerNight</label>
+      <input type="text" name="pricePerNight" ngModel /> 
+      </div>
+      <input type="submit">
+      <button type="submit" [routerLink]="['/room']">CANCEL</button>
+</form>
+</div>

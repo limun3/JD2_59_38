@@ -1,0 +1,32 @@
+
+
+<div class="container">
+	<form class="dugme" #f="ngForm" (ngSubmit)="onSubmit(f.value, f)">
+	<div>
+      <label for="id">Id</label>
+      <input type="text" name="id" ngModel>
+    </div>
+    <div>
+      <label for="roomNumber">RoomNumber</label>
+      <input type="text" name="roomNumber" ngModel>
+    </div> 
+    <div>
+      <label for="bedCount">Start Date</label>
+      <input type="text" name="bedCount" ngModel>
+    </div> 
+        <div>
+      <label for="description">End Date</label>
+      <input type="text" name="description" ngModel>
+    </div> 
+        <div>
+      <label for="pricePerNight">Time</label>
+      <input type="text" name="pricePerNight" ngModel>
+    </div> 
+        
+      <input type="submit">
+      <!--<button (click)="bookRoom(f.value)">BOOK</button>-->
+      <button [routerLink]="['/show-accommodation']">CANCEL</button>
+</form>
+<!--<input type="submit" [routerLink]="['/accommodationtype']">SUBMIT</input>-->
+<!--<button type="submit" [routerLink]="['/accommodationtype']">CANCEL</button>-->
+</div>

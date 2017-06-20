@@ -1,0 +1,25 @@
+<div  class="container">
+    <p>EDIT PLACE</p>
+	<form class="dugme" #f="ngForm" (ngSubmit)="updatePlace(f.value, f)">
+	 <div>
+      <label>Places: </label>
+     <select  class="form-control" name="Place" >
+        <option *ngFor="let pl of places" ng-value="pl.id" >ID: {{pl.Id}}, Name: {{pl.Name}}</option>
+        </select>
+    </div>
+    <div>
+      <label for="id">Id</label>
+      <input type="text" name="id" ngModel>
+    </div>
+    <div>
+      <label for="name">Name</label>
+      <input type="text" name="name" ngModel>
+    </div> 
+        <!--<div>
+      <label for="region">Region</label>
+      <input type="text" name="region" ngModel>
+    </div> -->
+      <input type="submit">
+      <button type="submit" [routerLink]="['/place']">CANCEL</button>
+</form>
+</div>

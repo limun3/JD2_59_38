@@ -21,12 +21,14 @@ ngOnInit() {}
 onSubmit(accommodation: Accommodation, form: NgForm) {
     console.log(accommodation);
     this.service.postAccommodation(accommodation);
+    // alert(accommodation.imageUrl);
+    // alert(accommodation.name);
     form.reset();
   }
   deleteAccommodation(id: number): void
   {
     this.service.remove(id);
-    alert(id);
+    // alert(id);
   }
 
 }

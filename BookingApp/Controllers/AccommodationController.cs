@@ -44,7 +44,7 @@ namespace BookingApp.Controllers
         }
         [HttpPost]
         [ResponseType(typeof(void))]
-        //[Authorize(Roles ="Manager")]
+        //[Authorize]
         public IHttpActionResult PostAccommodation(Accommodation accommodation)
         {
             if (!ModelState.IsValid)
@@ -70,7 +70,6 @@ namespace BookingApp.Controllers
         }
         [HttpPut]
         [ResponseType(typeof(void))]
-        [Authorize(Roles = "Admin")]
         public IHttpActionResult PutAccommodation(int id, Accommodation accommodation)
         {
             if (!ModelState.IsValid)

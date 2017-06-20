@@ -21,18 +21,16 @@ export class RoomService{
         return body || [];
     }
 
-    remove(id: number): Promise<void> {
+remove(id: number): Promise<void> {
       const uri =  "http://localhost:54042/api/room";
     const url = `${uri}/${id}`;
-    alert("room.service" + id);
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => null);
   }
 
-
 postRoom(room: Room): Promise<Room> {
-    alert ("Price: " + room.pricePerNight);
+    // alert ("Price: " + room.pricePerNight);
     return this.http
       .post("http://localhost:54042/api/room", JSON.stringify(
           {
@@ -50,4 +48,18 @@ postRoom(room: Room): Promise<Room> {
       .then(res => res.json().room as Room);
   }
 
+updateRooms(id: number, room: Room) {
+    //   alert ("updateRoom: ID: " + id + ", name: " + room.roomNumber);
+        let options = new RequestOptions();
+        options.headers = this.headers;
+
+        const path = "http://localhost:54042/api/room";
+        const uri = `${path}/${id}`;
+
+        // var s = `Id=${id}&Name=${pl.name}`;
+        return this.http.put(uri, JSON.stringify(room), options)
+        .toPromise()
+        .then(res => { debugger 
+        return res.json().room as Room;});
+    }
 }

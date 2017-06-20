@@ -1,0 +1,25 @@
+<div  class="container">
+    <p>EDIT COUNTRY</p>
+	<form class="dugme" #f="ngForm" (ngSubmit)="updateCountry(f.value, f)">
+	    <div>
+      <label>Countries: </label>
+     <select  class="form-control" name="Country" >
+        <option *ngFor="let co of countrys" ng-value="co.id" >ID: {{co.Id}}, Name: {{co.Name}}, Code: {{co.Code}}</option>
+        </select>
+    </div>
+    <div>
+      <label for="Id">Id</label>
+      <input type="text" name="id" ngModel>
+    </div>
+    <div>
+      <label for="Name">Name</label>
+      <input type="text" name="name" ngModel>
+    </div> 
+    <div>
+      <label for="Code">Code</label>
+      <input type="text" name="code" ngModel>
+    </div> 
+      <input class="button" type="submit">
+      <button type="submit" [routerLink]="['/country']">CANCEL</button>
+</form>
+</div>

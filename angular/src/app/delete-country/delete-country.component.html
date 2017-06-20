@@ -1,0 +1,8 @@
+<div class="container">
+<div >
+   <label for="Name">ID</label>
+        <input type="text" [(ngModel)]="brisanje" />
+  <button (click)="deleteCountry(brisanje)" [routerLink]="['/country']">Remove</button>
+  <button type="submit" [routerLink]="['/country']">CANCEL</button>
+</div>
+</div>

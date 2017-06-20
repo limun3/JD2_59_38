@@ -27,7 +27,7 @@ onSubmit(country: Country, form: NgForm) {
   deleteCountry(id: number): void
   {
     this.service.remove(id);
-    alert(id);
+    // alert(id);
   }
 
 }

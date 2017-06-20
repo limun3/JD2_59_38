@@ -23,9 +23,7 @@ export class AccommodationTypeService{
     }
 
      postAccomType(acctype: AccommodationType): Promise<AccommodationType> {
-         debugger
-    return this.http 
-      .post("http://localhost:54042/api/accommodationtypes", JSON.stringify(
+        return this.http.post("http://localhost:54042/api/accommodationtypes", JSON.stringify(
           {
               Id: acctype.Id,
               Name: acctype.Name
@@ -35,7 +33,7 @@ export class AccommodationTypeService{
       .then(res => res.json().acctype as AccommodationType);
   }
 
-  remove(id: number): Promise<void> {
+remove(id: number): Promise<void> {
       const uri =  "http://localhost:54042/api/accommodationtypes";
     const url = `${uri}/${id}`;
     return this.http.delete(url, {headers: this.headers})
@@ -43,4 +41,18 @@ export class AccommodationTypeService{
       .then(() => null);
   }
 
+  updateAccomodationType(id: number, at: AccommodationType) {
+      alert ("updateAccomodation: ID: " + id + ", name: " + at.Name);
+        let options = new RequestOptions();
+        options.headers = this.headers;
+
+        const path = "http://localhost:54042/api/accommodationtypes";
+        const uri = `${path}/${id}`;
+
+        var s = `Id=${id}&Name=${at.Name}`;
+        return this.http.put(uri, JSON.stringify(at), options)
+        .toPromise()
+        .then(res => { debugger 
+        return res.json() as AccommodationType;});
+    }
 }

@@ -1,0 +1,16 @@
+@import 'https://fonts.googleapis.com/css?family=Raleway';
+h1{
+  font-size: 30px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 15px;
+  margin-top: 2cm;
+}
+p{font-family: Raleway; color: whitesmoke; size: 80%;}
+
+.tekst{
+    size: 80%;
+    margin: 100px;
+}

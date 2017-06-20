@@ -26,6 +26,6 @@ onSubmit(place: Place, form: NgForm) {
 deletePlace(id: number): void
   {
     this.service.remove(id);
-    alert(id);
+    // alert(id);
   }
 }

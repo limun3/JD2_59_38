@@ -34,12 +34,28 @@ export class CountryService{
       .then(res => res.json().country as Country);
   }
 
-  remove(id: number): Promise<void> {
+remove(id: number): Promise<void> {
+    // alert ("Remove ID:" + id);
       const uri =  "http://localhost:54042/api/country";
     const url = `${uri}/${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => null);
   }
+
+
+updateCountry(id: number, country: Country) {
+        let options = new RequestOptions();
+        options.headers = this.headers;
+
+        const path = "http://localhost:54042/api/country";
+        const uri = `${path}/${id}`;
+
+        var s = `Id=${id}&Name=${country.name}`;
+        return this.http.put(uri, JSON.stringify(country), options)
+        .toPromise()
+        .then(res => { debugger 
+        return res.json() as Country;});
+    }
 
 }

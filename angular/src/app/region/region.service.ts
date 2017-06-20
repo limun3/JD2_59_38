@@ -21,8 +21,16 @@ export class RegionService{
         return body || [];
     }
     
+remove(id: number): Promise<void> {
+      const uri =  "http://localhost:54042/api/region";
+    const url = `${uri}/${id}`;
+    return this.http.delete(url, {headers: this.headers})
+      .toPromise()
+      .then(() => null);
+  }
+
     PostRegion(region: Region): Promise<Region> {
-        alert(region.id + " " +region.name + " " + region.country);
+        // alert(region.id + " " +region.name + " " + region.country);
     return this.http
       .post("http://localhost:54042/api/region", JSON.stringify(
           {
@@ -38,17 +46,25 @@ export class RegionService{
       .then(res => res.json().region as Region)
       .catch(this.handleError);
   }
+
+updateRegions(id: number, reg: Region) {
+    //   alert ("updateRegions: ID: " + id + ", name: " + reg.name);
+        let options = new RequestOptions();
+        options.headers = this.headers;
+
+        const path = "http://localhost:54042/api/region";
+        const uri = `${path}/${id}`;
+
+        // var s = `Id=${id}&Name=${pl.name}`;
+        return this.http.put(uri, JSON.stringify(reg), options)
+        .toPromise()
+        .then(res => { debugger 
+        return res.json().reg as Region;});
+    }
+
       private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
     }
-
-    remove(id: number): Promise<void> {
-      const uri =  "http://localhost:54042/api/region";
-    const url = `${uri}/${id}`;
-    return this.http.delete(url, {headers: this.headers})
-      .toPromise()
-      .then(() => null);
-  }
 
 }

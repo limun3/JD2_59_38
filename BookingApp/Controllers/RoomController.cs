@@ -69,7 +69,6 @@ namespace BookingApp.Controllers
         // PUT api/values/5
         [HttpPut]
         [ResponseType(typeof(void))]
-        [Authorize(Roles = "Manager")]
         public IHttpActionResult PutRoom(int id, Room room)
         {
             if(!ModelState.IsValid)

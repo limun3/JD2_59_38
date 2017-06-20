@@ -35,6 +35,7 @@ export class PlaceService{
       .toPromise()
       .then(res => res.json().place as Place);
   }
+
 remove(id: number): Promise<void> {
       const uri =  "http://localhost:54042/api/place";
     const url = `${uri}/${id}`;
@@ -43,4 +44,18 @@ remove(id: number): Promise<void> {
       .then(() => null);
   }
 
+  updatePlaces(id: number, pl: Place) {
+    //   alert ("updatePlaces: ID: " + id + ", name: " + pl.name);
+        let options = new RequestOptions();
+        options.headers = this.headers;
+
+        const path = "http://localhost:54042/api/place";
+        const uri = `${path}/${id}`;
+
+        // var s = `Id=${id}&Name=${pl.name}`;
+        return this.http.put(uri, JSON.stringify(pl), options)
+        .toPromise()
+        .then(res => { debugger 
+        return res.json().pl as Place;});
+    }
 }

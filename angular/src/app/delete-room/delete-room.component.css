@@ -1,0 +1,56 @@
+button {
+    background-color: #f44336;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 3cm;
+    float: center;
+}
+
+button {
+    background-color: #f44336;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 3cm;
+    float: center;
+}
+
+
+	input[type=submit] {
+      background-color: #f44336;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 3cm;
+    float: center;
+}
+
+/* Full-width inputs */
+input[type=text]{
+    width: 20%;
+    padding: 12px 10px;
+    margin: 0.5cm 0.1cm;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+
+/* Add a hover effect for buttons */
+button:hover {
+    opacity: 0.8;
+}
+
+
+/* Add padding to containers */
+.container {
+    padding: 2cm;
+    color: #9e9e9e;
+}

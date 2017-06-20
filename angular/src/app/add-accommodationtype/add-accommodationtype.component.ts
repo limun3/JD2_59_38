@@ -28,6 +28,6 @@ onSubmit(accommodationtype: AccommodationType, form: NgForm) {
   deleteAccomType(id: number): void
   {
     this.service.remove(id);
-    alert(id);
+    // alert(id);
   }
 }

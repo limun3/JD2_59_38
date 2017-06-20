@@ -45,9 +45,14 @@ namespace BookingApp.Controllers
 
         [HttpPost]
         [ResponseType(typeof(void))]
-        [Authorize(Roles = "AppUser")]
+        //[Authorize(Roles = "AppUser")]
         public IHttpActionResult PostRoomReservation(RoomReservation roomReservation)
         {
+            RoomReservation rr = new RoomReservation();
+            rr.Room = new Room { RoomNumber = 333 };
+            rr.Id = roomReservation.Id;
+            rr.User = new BAIdentityUser { Id = "User1" };
+
             if(!ModelState.IsValid)
             {
                 return BadRequest();
@@ -60,9 +65,9 @@ namespace BookingApp.Controllers
 
             try
             {
-                db.RoomReservations.Add(roomReservation);
+                db.RoomReservations.Add(rr);
                 db.SaveChanges();
-                return Ok(roomReservation);
+                return Ok(rr);
             }
             catch(Exception ex)
             {

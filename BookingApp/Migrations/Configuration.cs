@@ -108,7 +108,7 @@ namespace BookingApp.Migrations
             acc.AverageGrade = 5;
             acc.Comments = new List<Comment>();
             acc.Description = "Lux apartmants.";
-            acc.ImageUrl = string.Empty;
+            acc.ImageUrl = "slika";
             acc.Latitude = 0;
             acc.Longitude = 0;
             acc.Name = "Luxy";

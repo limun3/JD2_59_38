@@ -1,11 +1,11 @@
 <!--<div>-->
 <div *ngIf="!isLoggedIn() || (isLoggedIn() && !isAdmin() && !isManager())" class="container teal borderYtoX">
   <a [routerLink]="['/home']">HOME</a>
-  <a [routerLink]="['/accommodation']">ACCOMMODATION</a>
+  <a [routerLink]="['/show-accommodation']">ACCOMMODATION</a>
   <a [routerLink]="['/about']">ABOUT</a>
   <a [routerLink]="['/contact']">CONTACT</a>
   <a *ngIf="!isLoggedIn()" [routerLink]="['/login']">LOGIN</a>
-  <button *ngIf="isLoggedIn()" type="button" (click)="logOut()" 		class="cancelbtn">LOGOUT</button>
+  <button *ngIf="isLoggedIn()" type="button" (click)="logOut()" [routerLink]="['/home']" class="cancelbtn">LOGOUT</button>
 </div>
 <div *ngIf="isLoggedIn() && isAdmin()" class="container teal borderYtoX">
   <a [routerLink]="['/home']">HOME</a>
@@ -16,16 +16,18 @@
   <a [routerLink]="['/accommodation']">ACCOMMODATION</a>
   <a [routerLink]="['/room']">ROOM</a>
   <a [routerLink]="['/roomreservation']">ROOM RESERVATION</a>
-  <button type="button" (click)="logOut()" 		class="cancelbtn">LOGOUT</button>
+  <button type="button" (click)="logOut()" [routerLink]="['/home']"	class="cancelbtn">LOGOUT</button>
 </div>
 <div *ngIf="isLoggedIn() && isManager()" class="container teal borderYtoX">
   <a [routerLink]="['/home']">HOME</a>
   <a [routerLink]="['/accommodation']">ACCOMMODATION</a>
   <a [routerLink]="['/room']">ROOM</a>
-  <button type="button" (click)="logOut()" 		class="cancelbtn">LOGOUT</button>
+  <button type="button" (click)="logOut()" [routerLink]="['/home']"	class="cancelbtn">LOGOUT</button>
 </div>
   <router-outlet></router-outlet>
 <!--</div>-->
 
 <!--<div class="futer"><span>Designed by: Aleksa Janjic, Nebojsa Kanjeric</span>
   <span>© 2017 ALL RIGHTS RESERVED</span></div>-->
+
+
